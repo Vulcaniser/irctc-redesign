@@ -272,8 +272,8 @@ The data covers the project's principal city network, including:
 * Mumbai
 * Chennai
 * Guwahati
-* Kolkata / Howrah
-* Bengaluru
+* Howrah (Kolkata)
+* Bangalore (Bengaluru)
 
 Train information includes scheduled times, station codes, classes and running frequency where represented by the project's curated data.
 

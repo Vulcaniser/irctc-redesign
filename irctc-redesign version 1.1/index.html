@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRCTC Redesign | Book Train Tickets Online</title>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="navbar">
+    <nav class="navbar__inner" aria-label="Primary navigation">
+      <a href="/" class="navbar__brand" aria-label="IRCTC Indian Railways Catering and Tourism Corporation">
+        <img
+          class="navbar__brand-logo"
+          src="assets/images/irctc-logo.png"
+          alt="IRCTC"
+        >
+        <span class="navbar__brand-lockup">
+          <span class="navbar__brand-text">IRCTC</span>
+          <span class="navbar__brand-subtext">Indian Railways Catering &amp; Tourism Corporation</span>
+        </span>
+      </a>
+
+      <ul class="navbar__links">
+        <li><a href="#booking-widget" class="navbar__link">Book Ticket</a></li>
+        <li><a href="#pnr-status" class="navbar__link">PNR Status</a></li>
+        <li><a href="#train-status" class="navbar__link">Train Status</a></li>
+      </ul>
+
+      <div class="navbar__actions">
+        <button type="button" class="btn btn--outline navbar__auth-btn">
+          Login / Register
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO SECTION ============ -->
+    <section class="hero" aria-label="Introduction">
+      <div class="hero__content">
+        <h1 class="hero__headline">Your Journey, Simplified.</h1>
+        <p class="hero__subtext">
+          Search, compare and book train tickets across India in just a few clicks.
+        </p>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <!--
+          India journey map preview - a fully vector visualization, not an
+          embedded map image. Purely supplementary/decorative from an
+          accessibility standpoint (the same origin/destination/journey
+          information is available as accessible text via the booking form
+          and, later, the search results) - hence aria-hidden on the
+          wrapper.
+
+          Layers (bottom to top), each independently controllable:
+            .map-preview__outline-layer  - India boundary (derived from the
+                                            verified Wikimedia SVG via
+                                            contour extraction, not traced
+                                            by hand - see route-preview.js)
+            .map-preview__network-layer  - background railway network
+                                            (real sampled train paths from
+                                            the verified anandology/railways
+                                            dataset, not the Wikimedia SVG)
+            .map-preview__route-layer    - the selected journey's glow+core
+            .map-preview__marker-layer   - station markers
+
+          data-state drives the visual treatment in components.css:
+          idle | origin-set | destination-set | active | unsupported-route
+        -->
+        <div class="map-preview" id="map-preview" data-state="idle">
+          <svg
+            class="map-preview__svg"
+            viewBox="0 0 1280 1400"
+            preserveAspectRatio="xMidYMid meet"
+            aria-hidden="true"
+          >
+            <defs>
+              <filter id="map-glow-soft" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="map-glow-route" x="-80%" y="-80%" width="260%" height="260%">
+                <feGaussianBlur stdDeviation="7" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <g class="map-preview__outline-layer"></g>
+            <g class="map-preview__network-layer"></g>
+            <g class="map-preview__route-layer"></g>
+            <g class="map-preview__marker-layer"></g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ BOOKING WIDGET ============ -->
+    <section class="booking-widget" id="booking-widget" aria-label="Train booking">
+      <div class="booking-card">
+
+        <!-- Tabs -->
+        <div class="booking-tabs" role="tablist" aria-label="Booking service type">
+          <button
+            type="button"
+            class="booking-tabs__tab booking-tabs__tab--active"
+            role="tab"
+            aria-selected="true"
+            id="tab-book-ticket"
+          >
+            Book Ticket
+          </button>
+          <button
+            type="button"
+            class="booking-tabs__tab"
+            role="tab"
+            aria-selected="false"
+            id="tab-pnr-status"
+          >
+            PNR Status
+          </button>
+          <button
+            type="button"
+            class="booking-tabs__tab"
+            role="tab"
+            aria-selected="false"
+            id="tab-live-status"
+          >
+            Live Status
+          </button>
+        </div>
+
+        <!-- Booking Form -->
+        <form class="booking-form" aria-labelledby="tab-book-ticket">
+
+          <div class="booking-form__stations">
+            <div class="form-field">
+              <label for="from-station">From</label>
+              <input
+                type="text"
+                id="from-station"
+                name="from-station"
+                class="form-field__input"
+                placeholder="Enter source station"
+                autocomplete="off"
+              >
+            </div>
+
+            <button
+              type="button"
+              class="btn-icon swap-btn"
+              aria-label="Swap source and destination stations"
+            >
+              ⇄
+            </button>
+
+            <div class="form-field">
+              <label for="to-station">To</label>
+              <input
+                type="text"
+                id="to-station"
+                name="to-station"
+                class="form-field__input"
+                placeholder="Enter destination station"
+                autocomplete="off"
+              >
+            </div>
+          </div>
+
+          <div class="booking-form__details">
+            <div class="form-field">
+              <label for="journey-date">Journey Date</label>
+              <input
+                type="date"
+                id="journey-date"
+                name="journey-date"
+                class="form-field__input"
+              >
+            </div>
+
+            <div class="form-field">
+              <label for="travel-class">Class</label>
+              <select id="travel-class" name="travel-class" class="form-field__input">
+                <option value="">All Classes</option>
+                <option value="sl">Sleeper (SL)</option>
+                <option value="3a">AC 3 Tier (3A)</option>
+                <option value="2a">AC 2 Tier (2A)</option>
+                <option value="1a">AC First Class (1A)</option>
+                <option value="cc">Chair Car (CC)</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="passenger-count">Passengers</label>
+              <input
+                type="number"
+                id="passenger-count"
+                name="passenger-count"
+                class="form-field__input"
+                min="1"
+                max="6"
+                value="1"
+              >
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn--primary booking-form__submit">
+            Search Trains
+          </button>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ QUICK ACTIONS ============ -->
+    <section class="quick-actions" aria-label="Quick actions">
+      <h2 class="quick-actions__heading">Quick Actions</h2>
+
+      <div class="quick-actions__grid">
+        <button type="button" class="quick-action-card" id="pnr-status">
+          <span class="quick-action-card__label">PNR Status</span>
+        </button>
+
+        <button type="button" class="quick-action-card" id="train-status">
+          <span class="quick-action-card__label">Train Status</span>
+        </button>
+
+        <button type="button" class="quick-action-card">
+          <span class="quick-action-card__label">My Bookings</span>
+        </button>
+
+        <button type="button" class="quick-action-card">
+          <span class="quick-action-card__label">Help</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ SEARCH RESULTS ============ -->
+    <section class="search-results" aria-label="Search results" hidden>
+      <div class="search-results__header">
+        <h2 class="search-results__title">Available Trains</h2>
+        <!-- Route/date summary will be populated dynamically -->
+      </div>
+
+      <div class="search-results__body">
+        <aside class="search-results__filters" aria-label="Filter results">
+          <!-- Filter controls placeholder, to be built later -->
+        </aside>
+
+        <div class="search-results__list">
+          <!-- Train result cards will be injected here dynamically -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__section">
+        <h3 class="site-footer__heading">IRCTC</h3>
+        <p class="site-footer__text">A modern, user-friendly train booking experience.</p>
+      </div>
+
+      <div class="site-footer__section">
+        <h3 class="site-footer__heading">Quick Links</h3>
+        <ul class="site-footer__links">
+          <li><a href="#booking-widget">Book Ticket</a></li>
+          <li><a href="#pnr-status">PNR Status</a></li>
+          <li><a href="#train-status">Train Status</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__section">
+        <h3 class="site-footer__heading">Support</h3>
+        <ul class="site-footer__links">
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>&copy; 2026 IRCTC Redesign Project. Built for a frontend development competition.</p>
+      <p class="site-footer__attribution">
+        Railway network map: <a href="https://commons.wikimedia.org/wiki/File:Indian_Railways_network-en.svg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.
+        Route &amp; station data: <a href="https://github.com/anandology/railways" target="_blank" rel="noopener noreferrer">DataMeet Railways</a> (CC0).
+        Journey previews are illustrative, not exact track geometry.
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer></script>
+  <script src="js/data/stations.js" defer></script>
+  <script src="js/data/routes.js" defer></script>
+  <script src="js/data/india-outline.js" defer></script>
+  <script src="js/data/network-lines.js" defer></script>
+  <script src="js/data/geo-calibration.js" defer></script>
+  <script src="js/route-preview.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/booking-form.js" defer></script>
+  <script src="js/data/train-data.js" defer></script>
+  <script src="js/search-results.js" defer></script>
+</body>
+</html>

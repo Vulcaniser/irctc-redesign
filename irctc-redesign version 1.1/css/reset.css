@@ -1,0 +1,128 @@
+/* ==========================================================================
+   reset.css
+   Purpose: Lightweight modern reset. Normalizes default browser styling
+   (margins, box-sizing, list styles, form element inheritance, etc.) so
+   components render predictably across browsers. Intentionally minimal -
+   no third-party reset library.
+   ========================================================================== */
+
+/* Box-sizing: border-box everywhere, inherited so it can be overridden
+   locally (e.g. by a third-party component) without extra specificity. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin/padding browsers apply to nearly every element. */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Root: smooth scrolling for in-page anchors (nav links, quick actions),
+   respects reduced-motion preference. */
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Body: remove default margin, set sensible baseline text rendering. */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings and paragraphs inherit sizing from components.css rather than
+   browser defaults; weight/size are set deliberately per component. */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1.2;
+}
+
+/* Lists used purely for layout (nav, footer link groups) shouldn't carry
+   bullets/markers by default; semantic lists can opt back in locally. */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Links: remove default underline/color, inherit from surrounding text.
+   Components.css defines explicit link styling where links are content
+   rather than layout (e.g. footer text links). */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Images/media: responsive by default, no inline-gap under the baseline. */
+img,
+picture,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Form elements: inherit typography from the page instead of using the
+   browser/OS default control font, so custom fonts apply consistently. */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Buttons: remove default browser chrome (background, border) so all
+   button styling is explicit and intentional in components.css. */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Remove default focus outline here only because a deliberate,
+   accessible focus style is (re)applied in components.css via
+   --shadow-focus / --color-border-focus - never omit it entirely. */
+:focus {
+  outline: none;
+}
+
+/* Preserve a visible focus ring for keyboard users specifically, so
+   removing the default outline above never harms accessibility. */
+:focus-visible {
+  outline: 2px solid var(--color-border-focus, #1a468c);
+  outline-offset: 2px;
+}
+
+/* Tables: predictable border behavior if tables are introduced later. */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Fieldset/legend reset for the same reason as buttons/inputs above. */
+fieldset {
+  border: none;
+}
+
+/* Prevent long unbroken strings (e.g. station names, URLs) from
+   overflowing narrow containers on mobile. */
+p,
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+

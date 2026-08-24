@@ -1,0 +1,1268 @@
+/* ==========================================================================
+   components.css
+   Purpose: Visual styling for reusable UI components - navbar, buttons,
+   booking card, tabs, form fields, quick-action panel, train result
+   cards, footer, etc.
+
+   Design concept: "Indian Railways x Modern Travel Experience" - a
+   premium travel product rather than a government portal or generic
+   SaaS dashboard. See variables.css for the full token rationale.
+
+   Scope: color, typography, decorative motifs, and interaction states.
+   Structural placement/grid/flex scaffolding lives in layout.css.
+   Because this stylesheet is linked AFTER layout.css in index.html, any
+   equal-specificity property set here (e.g. .hero padding-block) wins
+   in the cascade - this lets us refine spacing/positioning for the new
+   visual direction without editing layout.css at all.
+
+   ANIMATION PREP: interactive states below use only `transform` and
+   `opacity` (never top/left/margin) so Anime.js can hook into the same
+   properties later without any CSS rework. Elements flagged
+   "ANIMATION HOOK" are the ones named in the brief as future animation
+   targets; they are left fully visible (no default hidden/opacity:0
+   state) since no JS exists yet to reveal them.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------
+   Base typography
+   -------------------------------------------------------------------- */
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-base);
+}
+
+/* --------------------------------------------------------------------
+   Shared buttons
+   -------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: background-color var(--transition-base) var(--easing-standard),
+    border-color var(--transition-base) var(--easing-standard),
+    color var(--transition-base) var(--easing-standard),
+    box-shadow var(--transition-base) var(--easing-standard),
+    transform var(--transition-base) var(--easing-standard);
+}
+
+/* Only used inside the dark navbar in the current markup, so styled
+   directly for that context (light text/border on midnight). */
+.btn--outline {
+  background-color: transparent;
+  border-color: var(--color-border-inverse-strong);
+  color: var(--color-text-inverse);
+}
+
+.btn--outline:hover {
+  border-color: var(--color-gold-500);
+  color: var(--color-gold-500);
+}
+
+.btn--outline:focus-visible {
+  box-shadow: var(--shadow-focus);
+}
+
+/* Primary CTA - the strongest action on the page (Search Trains). Uses
+   a gradient rather than a flat fill so it reads as "premium product"
+   rather than a stock Bootstrap button, and lifts on hover/active via
+   transform only (ANIMATION HOOK: search button). */
+.btn--primary {
+  background-image: var(--gradient-cta);
+  border-color: transparent;
+  color: var(--color-text-inverse);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  font-size: var(--font-size-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--primary:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--primary:focus-visible {
+  box-shadow: var(--shadow-focus);
+}
+
+/* Icon-only buttons (e.g. swap button base) */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-default);
+  background-color: var(--color-bg-surface);
+  color: var(--color-midnight-600);
+  font-size: var(--font-size-md);
+  transition: background-color var(--transition-base) var(--easing-standard),
+    border-color var(--transition-base) var(--easing-standard),
+    transform var(--transition-base) var(--easing-standard);
+}
+
+.btn-icon:focus-visible {
+  box-shadow: var(--shadow-focus);
+}
+
+/* ==========================================================================
+   1. NAVBAR
+   ========================================================================== */
+
+.navbar {
+  background-color: var(--color-midnight-800);
+  border-bottom: 1px solid var(--color-border-inverse);
+}
+
+.navbar__brand-text {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gold-500);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.navbar__link {
+  position: relative;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-inverse-muted);
+  padding-block: var(--space-2);
+  transition: color var(--transition-base) var(--easing-standard);
+}
+
+.navbar__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background-color: var(--color-gold-500);
+  border-radius: var(--radius-full);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--transition-base) var(--easing-standard);
+}
+
+.navbar__link:hover {
+  color: var(--color-text-inverse);
+}
+
+.navbar__link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Active/current navigation state - applied via aria-current="page" (or
+   a matching class) once JS/routing determines the active section. */
+.navbar__link[aria-current="page"],
+.navbar__link--active {
+  color: var(--color-text-inverse);
+}
+
+.navbar__link[aria-current="page"]::after,
+.navbar__link--active::after {
+  transform: scaleX(1);
+}
+
+.navbar__auth-btn {
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   2. HERO - the page's major visual statement
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  isolation: isolate;   /* keeps decorative layers below in their own stack */
+  overflow: hidden;      /* clip the full-bleed backdrop cleanly */
+  color: var(--color-text-inverse);
+  min-height: 62vh;
+  /* Overrides layout.css's padding-block via cascade (this file loads
+     after layout.css) to give the larger headline more room to breathe. */
+  padding-block: var(--space-10) var(--space-9);
+}
+
+/* Full-bleed dark gradient backdrop, breaking out of the section's own
+   max-width using the classic negative-margin/100vw technique - purely
+   decorative, so it doesn't affect any structural sizing in layout.css. */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background-image: var(--gradient-hero);
+  z-index: -2;
+}
+
+/* Ambient accent glow + faint diagonal rail-track texture, layered above
+   the gradient but behind all text content. */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--gradient-accent-glow),
+    var(--gradient-accent-glow-2),
+    var(--gradient-rail-texture);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ANIMATION HOOK: hero headline - plain block-level text, ready for a
+   later fade/slide-in driven purely by transform + opacity. */
+.hero__headline {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-hero);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text-inverse);
+  text-transform: uppercase;
+}
+
+.hero__subtext {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-inverse-muted);
+  max-width: 46ch;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-block: var(--space-8) var(--space-6);
+  }
+
+  .hero__subtext {
+    max-width: 100%;
+  }
+}
+
+/* --------------------------------------------------------------------
+   INDIA JOURNEY MAP PREVIEW
+   Fully vector visualization - no embedded map image anywhere. Four
+   independently-styled SVG layers (outline, background network, route,
+   markers). See route-preview.js for full data provenance and the
+   affine-transform accuracy notes.
+
+   data-state on #map-preview drives the progressive-reveal states:
+   idle -> origin-set / destination-set -> active / unsupported-route
+
+   Visual hierarchy (deliberately in this order of prominence):
+   selected route > origin/destination markers > India outline >
+   background network.
+   -------------------------------------------------------------------- */
+
+.map-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1280 / 1400;
+  max-height: 460px;
+  margin-inline: auto;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  /* Dark radial backdrop panel - the map's own "surface", not a
+     screenshot. Slightly deeper than the hero's own gradient so the
+     map reads as an inset instrument panel within it. */
+  background: radial-gradient(ellipse at 50% 40%,
+    var(--color-midnight-700) 0%, var(--color-midnight-900) 75%);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.45);
+  transition: max-height var(--transition-slow) var(--easing-standard);
+  /* ANIMATION HOOK: map entrance - opacity-only fade handled by
+     route-preview.js on init; respects prefers-reduced-motion. */
+}
+
+.map-preview__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* --- Layer 1: India outline --------------------------------------- */
+.map-outline {
+  fill: rgba(110, 168, 255, 0.05);
+  stroke: var(--color-map-outline);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  opacity: 0.55;
+  filter: url(#map-glow-soft);
+  transition: opacity var(--transition-slow) var(--easing-standard);
+}
+
+/* --- Layer 2: background railway network --------------------------- */
+.map-network-line {
+  stroke: var(--color-map-network);
+  stroke-width: 0.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.22;
+  transition: opacity var(--transition-slow) var(--easing-standard);
+}
+
+/* Progressive states: both static layers recede slightly once a route
+   is active, letting the luminous route take over as the clear visual
+   focal point without disappearing entirely. */
+.map-preview[data-state="active"] .map-outline,
+.map-preview[data-state="unsupported-route"] .map-outline {
+  opacity: 0.4;
+}
+
+.map-preview[data-state="active"] .map-network-line,
+.map-preview[data-state="unsupported-route"] .map-network-line {
+  opacity: 0.14;
+}
+
+.map-preview--emphasized {
+  max-height: 520px;
+}
+
+/* --- Layer 4: station markers --------------------------------------- */
+.map-marker__halo {
+  fill: var(--color-map-outline);
+  opacity: 0.18;
+}
+
+.map-marker__core {
+  fill: var(--color-map-outline);
+  opacity: 0.7;
+}
+
+.map-marker--waypoint .map-marker__core {
+  fill: var(--color-route-core);
+  opacity: 0.85;
+}
+
+/* Origin - fluorescent green, restrained */
+.map-marker--origin .map-marker__core {
+  fill: var(--color-marker-origin);
+  opacity: 1;
+}
+
+.map-marker--origin .map-marker__halo {
+  fill: var(--color-marker-origin);
+  opacity: 0.32;
+  filter: url(#map-glow-soft);
+}
+
+/* Destination - fluorescent red, restrained */
+.map-marker--destination .map-marker__core {
+  fill: var(--color-marker-destination);
+  opacity: 1;
+}
+
+.map-marker--destination .map-marker__halo {
+  fill: var(--color-marker-destination);
+  opacity: 0.32;
+  filter: url(#map-glow-soft);
+}
+
+/* --- Layer 3: selected route ---------------------------------------- */
+/* Layered glow + core, restrained rather than a neon tube: modest
+   stroke widths, a documented soft blur filter (see SVG <defs> in
+   index.html), and an opacity ceiling below 1 on the glow layer. */
+.map-route__glow {
+  stroke: var(--color-route-glow);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.4;
+  filter: url(#map-glow-route);
+}
+
+.map-route__core {
+  stroke: var(--color-route-core);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.95;
+}
+
+/* Reduced motion: show the final state directly, no drawing/pulse
+   animation - route-preview.js also skips the anime.js calls entirely
+   when this is set, this is a CSS-level backstop. */
+@media (prefers-reduced-motion: reduce) {
+  .map-preview,
+  .map-outline,
+  .map-network-line,
+  .map-marker,
+  .map-marker__halo,
+  .map-route__glow,
+  .map-route__core {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .map-preview {
+    max-height: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .map-preview {
+    max-height: 280px;
+  }
+}
+
+/* ==========================================================================
+   3. BOOKING CARD (primary focus)
+   ========================================================================== */
+
+/* Floats over the dark hero backdrop (layout.css already pulls it up
+   via a negative margin); the strong --shadow-lift + warm white surface
+   is what makes that overlap read as intentional depth rather than an
+   overlap bug. */
+.booking-card {
+  position: relative;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lift);
+  overflow: hidden; /* clip the livery stripe to the card's rounded corners */
+}
+
+/* Livery stripe - a small nod to railway-carriage branding along the
+   top edge of the card. */
+.booking-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-image: var(--gradient-cta);
+}
+
+/* Tabs */
+.booking-tabs {
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-3);
+}
+
+.booking-tabs__tab {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-base) var(--easing-standard),
+    color var(--transition-base) var(--easing-standard);
+}
+
+.booking-tabs__tab:hover {
+  color: var(--color-midnight-700);
+  background-color: var(--color-accent-100);
+}
+
+.booking-tabs__tab:focus-visible {
+  box-shadow: var(--shadow-focus);
+}
+
+.booking-tabs__tab--active,
+.booking-tabs__tab[aria-selected="true"] {
+  color: var(--color-midnight-700);
+  background-color: var(--color-accent-100);
+}
+
+/* Form labels */
+.form-field label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+/* Inputs / selects shared styling - sized generously ("larger station
+   fields") for a premium, easy-to-tap feel. */
+.form-field__input {
+  width: 100%;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  transition: border-color var(--transition-base) var(--easing-standard),
+    box-shadow var(--transition-base) var(--easing-standard);
+}
+
+.form-field__input::placeholder {
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-regular);
+}
+
+.form-field__input:hover {
+  border-color: var(--color-border-strong);
+}
+
+.form-field__input:focus-visible,
+.form-field__input:focus {
+  outline: none;
+  border-color: var(--color-accent-600);
+  box-shadow: var(--shadow-focus);
+}
+
+select.form-field__input {
+  cursor: pointer;
+}
+
+/* Station fields sit as one visually connected instrument - a shaded
+   panel either side of the swap button, rather than two plain inputs. */
+.booking-form__stations .form-field {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  transition: border-color var(--transition-base) var(--easing-standard),
+    background-color var(--transition-base) var(--easing-standard);
+}
+
+.booking-form__stations .form-field:focus-within {
+  border-color: var(--color-accent-600);
+  background-color: var(--color-bg-surface);
+}
+
+.booking-form__stations .form-field label {
+  margin-bottom: 2px;
+}
+
+.booking-form__stations .form-field__input {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.booking-form__stations .form-field__input:focus,
+.booking-form__stations .form-field__input:focus-visible {
+  box-shadow: none;
+}
+
+/* ANIMATION HOOK: swap button - the booking widget's signature
+   interaction. Gradient-filled and enlarged so it reads as a distinct
+   control rather than a small icon button; rotates 180deg on
+   activation using transform only. */
+.swap-btn {
+  margin-bottom: 2px;
+  width: 48px;
+  height: 48px;
+  background-image: var(--gradient-cta);
+  border: 3px solid var(--color-bg-surface);
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.swap-btn:hover {
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.06);
+}
+
+.swap-btn:active {
+  transform: rotate(180deg);
+}
+
+.swap-btn:focus-visible {
+  box-shadow: var(--shadow-focus);
+}
+
+/* Date / class / passenger controls */
+.booking-form__details .form-field label {
+  margin-bottom: 2px;
+}
+
+/* ANIMATION HOOK: Search Trains button - the strongest CTA on the page.
+   The arrow glyph nudges right on hover as a lightweight, CSS-only
+   preview of the motion Anime.js will later own. */
+.booking-form__submit {
+  font-size: var(--font-size-md);
+  padding: var(--space-4) var(--space-6);
+  margin-top: var(--space-2);
+}
+
+.booking-form__submit::after {
+  content: "\2192"; /* → */
+  display: inline-block;
+  transition: transform var(--transition-base) var(--easing-standard);
+}
+
+.booking-form__submit:hover::after {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   4. QUICK ACTIONS - one unified travel-utility strip, not four
+   separate SaaS cards. Grid scaffolding (columns/gap) stays exactly as
+   defined in layout.css; here the whole grid becomes a single bordered
+   panel and individual items lose their own card chrome in favor of
+   slim dividers between them.
+   ========================================================================== */
+
+.quick-actions__heading {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-midnight-800);
+}
+
+.quick-actions__grid {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-2);
+}
+
+.quick-action-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  background-color: transparent;
+  border-radius: var(--radius-md);
+  padding: var(--space-5) var(--space-4);
+  transition: background-color var(--transition-base) var(--easing-standard),
+    transform var(--transition-base) var(--easing-standard);
+}
+
+/* Slim divider between items instead of individual card borders/shadows -
+   sits in the grid gap so it doesn't require a layout.css change. */
+.quick-action-card:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: var(--space-4);
+  bottom: var(--space-4);
+  right: calc(var(--space-5) / -2);
+  width: 1px;
+  background-color: var(--color-border-subtle);
+}
+
+/* Distinctive gradient icon chip in place of a generic gray circle -
+   the actual icon glyph can be dropped in later without restructuring. */
+.quick-action-card::before {
+  content: "";
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-image: var(--gradient-cta);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base) var(--easing-standard);
+}
+
+.quick-action-card__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.quick-action-card:hover {
+  background-color: var(--color-bg-subtle);
+}
+
+.quick-action-card:hover::before {
+  transform: translateY(-3px);
+}
+
+.quick-action-card:focus-visible {
+  box-shadow: var(--shadow-focus);
+}
+
+.quick-action-card:active::before {
+  transform: translateY(0);
+}
+
+/* Mobile: single column - dividers switch from vertical (right edge)
+   to horizontal (bottom edge) between stacked items. */
+@media (max-width: 480px) {
+  .quick-action-card:not(:last-child)::after {
+    top: auto;
+    bottom: calc(var(--space-5) / -2);
+    left: var(--space-4);
+    right: var(--space-4);
+    width: auto;
+    height: 1px;
+  }
+}
+
+/* ==========================================================================
+   5. SEARCH RESULT CARDS - styled as boarding-pass-like journey
+   information rather than generic database rows.
+   ========================================================================== */
+
+.search-results__title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-midnight-800);
+}
+
+.search-results__filters {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+/*
+  Expected markup convention for search-results.js to generate inside
+  .search-results__list (documented here since index.html leaves this
+  section empty by design):
+
+  <article class="train-card">
+    <div class="train-card__header">
+      <h3 class="train-card__name">Rajdhani Express</h3>
+      <span class="train-card__number">12301</span>
+    </div>
+    <div class="train-card__route">
+      <div class="train-card__stop">
+        <span class="train-card__time">16:55</span>
+        <span class="train-card__station">NDLS</span>
+      </div>
+      <div class="train-card__duration">
+        <span>17h 20m</span>
+      </div>
+      <div class="train-card__stop">
+        <span class="train-card__time">10:15</span>
+        <span class="train-card__station">HWH</span>
+      </div>
+    </div>
+    <div class="train-card__classes">
+      <div class="train-card__class-option">
+        <span class="train-card__class-name">3A</span>
+        <span class="train-card__fare">Rs. 1,455</span>
+        <span class="train-card__availability train-card__availability--available">
+          Available 42
+        </span>
+      </div>
+      ...
+    </div>
+    <div class="train-card__actions">
+      <button type="button" class="btn btn--primary">Book Now</button>
+    </div>
+  </article>
+*/
+
+/* ANIMATION HOOK: train cards - plain block-level articles in a flex
+   list, ready for a later staggered fade/slide-in via transform +
+   opacity when results first populate. */
+.train-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-left: 4px solid var(--color-accent-500); /* ticket-stub livery edge */
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base) var(--easing-standard),
+    transform var(--transition-base) var(--easing-standard);
+}
+
+.train-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.train-card__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.train-card__name {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.train-card__number {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+/* Dashed top/bottom rule evokes a boarding-pass perforation. */
+.train-card__route {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+  border-block: 1px dashed var(--color-border-default);
+}
+
+.train-card__stop {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* Large, expressive departure/arrival times. */
+.train-card__time {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-midnight-800);
+}
+
+/* Station-dot motif - a small gold marker in front of each station
+   code, echoing the hero's route-line markers. */
+.train-card__station {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.train-card__station::before {
+  content: "\25CF"; /* ● */
+  color: var(--color-gold-500);
+  font-size: 0.55em;
+  margin-right: var(--space-1);
+  vertical-align: middle;
+}
+
+.train-card__duration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  flex: 1;
+  position: relative;
+}
+
+.train-card__duration::before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-border-default);
+}
+
+.train-card__classes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.train-card__class-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  min-width: 120px;
+  transition: border-color var(--transition-base) var(--easing-standard);
+}
+
+.train-card__class-option:hover {
+  border-color: var(--color-accent-500);
+}
+
+.train-card__class-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.train-card__fare {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-midnight-700);
+}
+
+.train-card__availability {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.train-card__availability--available {
+  color: var(--color-success-600);
+}
+
+.train-card__availability--limited {
+  color: var(--color-warning-600);
+}
+
+.train-card__availability--unavailable {
+  color: var(--color-error-600);
+}
+
+.train-card__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 480px) {
+  .train-card__route {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .train-card__duration::before {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   6. FOOTER
+   ========================================================================== */
+
+.site-footer {
+  position: relative;
+  background-color: var(--color-midnight-900);
+  color: var(--color-text-inverse);
+}
+
+/* Livery stripe echoing the booking card, for visual bookending. */
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-image: var(--gradient-cta);
+}
+
+.site-footer__heading {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+  color: var(--color-gold-500);
+}
+
+.site-footer__text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-inverse-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+.site-footer__links a {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-inverse-muted);
+  transition: color var(--transition-base) var(--easing-standard);
+}
+
+.site-footer__links a:hover {
+  color: var(--color-text-inverse);
+  text-decoration: underline;
+}
+
+.site-footer__bottom {
+  border-top: 1px solid var(--color-border-inverse);
+}
+
+.site-footer__bottom p {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-inverse-muted);
+}
+
+.site-footer__attribution {
+  margin-top: var(--space-2);
+  opacity: 0.75;
+}
+
+.site-footer__attribution a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   MODERN DARK IRCTC EXPERIENCE
+   Reference-driven, not a copy: uses the supplied Figma screenshot only
+   for the dark atmosphere, warm/cool contrast and asymmetric visual rhythm.
+   No route/map behavior is changed here.
+   ========================================================================== */
+
+html { scroll-behavior: smooth; }
+
+body {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-base);
+}
+
+.navbar {
+  background: rgba(3,5,10,.88);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 30px rgba(0,0,0,.2);
+}
+
+.navbar__brand {
+  gap: .7rem;
+  min-width: 250px;
+  position: relative;
+}
+
+.navbar__brand-logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 0 12px rgba(92,119,255,.16));
+}
+
+.navbar__brand-lockup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.navbar__brand-text {
+  font-family: var(--font-family-display);
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: #f0a04a;
+  letter-spacing: .08em;
+  line-height: 1;
+}
+
+.navbar__brand-subtext {
+  max-width: 220px;
+  color: #69758b;
+  font-size: .5rem;
+  line-height: 1.2;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.navbar__link {
+  color: #9ca8bc;
+}
+
+.navbar__link:hover,
+.navbar__link[aria-current="page"],
+.navbar__link--active { color: #fff; }
+
+.navbar__link::after { background: #e89a45; }
+
+.btn--outline {
+  background: rgba(255,255,255,.025);
+  border-color: rgba(255,255,255,.16);
+  color: #eef2fb;
+}
+
+.btn--outline:hover {
+  background: rgba(239,154,61,.08);
+  border-color: rgba(239,154,61,.55);
+  color: #ffc276;
+}
+
+.hero { color: var(--color-text-inverse); }
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  padding-block: 2rem;
+}
+
+.hero__headline {
+  max-width: 9ch;
+  font-size: clamp(3.1rem,5vw,5rem);
+  line-height: .98;
+  letter-spacing: -.045em;
+  text-transform: none;
+  text-shadow: 0 12px 50px rgba(0,0,0,.35);
+}
+
+.hero__headline::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 3px;
+  margin-top: 1.5rem;
+  border-radius: 99px;
+  background: linear-gradient(90deg,#e99a47,rgba(233,154,71,0));
+}
+
+.hero__subtext {
+  max-width: 48ch;
+  color: #9da8bb;
+  font-size: 1rem;
+}
+
+.map-preview {
+  border: 1px solid rgba(116,145,205,.11);
+  border-radius: 22px;
+  background: radial-gradient(circle at 50% 42%,rgba(22,43,92,.28),transparent 48%),#03060d;
+  box-shadow: inset 0 0 70px rgba(0,0,0,.6), 0 24px 70px rgba(0,0,0,.34);
+}
+
+/* Keep the approved map appearance, only integrate its panel into the page. */
+.map-outline { opacity: .48; }
+.map-network-line { opacity: .2; }
+
+.booking-widget { z-index: 5; }
+
+.booking-card {
+  background: linear-gradient(145deg,rgba(18,24,38,.96),rgba(10,14,24,.98));
+  border: 1px solid rgba(255,255,255,.085);
+  border-radius: 20px;
+  box-shadow: 0 28px 80px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.035);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.booking-card::before {
+  height: 2px;
+  background: linear-gradient(90deg,transparent,#e89a45 25%,#e89a45 75%,transparent);
+  opacity: .9;
+}
+
+.booking-tabs {
+  border-bottom-color: rgba(255,255,255,.07);
+}
+
+.booking-tabs__tab {
+  color: #78849a;
+  background: transparent;
+}
+
+.booking-tabs__tab:hover {
+  color: #f2f5fb;
+  background: rgba(239,154,61,.07);
+}
+
+.booking-tabs__tab--active,
+.booking-tabs__tab[aria-selected="true"] {
+  color: #f5b568;
+  background: rgba(239,154,61,.1);
+}
+
+.form-field label {
+  color: #7f8ca1;
+}
+
+.form-field__input {
+  color: #f4f7fd;
+  background: #0a0f1b;
+  border-color: rgba(255,255,255,.1);
+  border-radius: 10px;
+}
+
+.form-field__input::placeholder { color: #5f6a7d; }
+.form-field__input:hover { border-color: rgba(255,255,255,.2); }
+.form-field__input:focus,
+.form-field__input:focus-visible {
+  border-color: rgba(239,154,61,.7);
+  box-shadow: 0 0 0 3px rgba(239,154,61,.11),0 0 26px rgba(239,154,61,.08);
+}
+
+.booking-form__stations .form-field {
+  background: linear-gradient(145deg,#101827,#0a101c);
+  border-color: rgba(255,255,255,.08);
+}
+
+.booking-form__stations .form-field:focus-within {
+  background: #0c1422;
+  border-color: rgba(239,154,61,.55);
+}
+
+.booking-form__stations .form-field__input {
+  color: #fff;
+}
+
+.btn-icon.swap-btn {
+  border-color: #111827;
+}
+
+.booking-form__details .form-field__input {
+  min-height: 48px;
+}
+
+.btn--primary {
+  min-height: 54px;
+  border-radius: 11px;
+  box-shadow: 0 12px 30px rgba(190,91,18,.2);
+}
+
+.btn--primary:hover {
+  box-shadow: 0 16px 38px rgba(190,91,18,.3),0 0 24px rgba(239,154,61,.08);
+}
+
+.quick-actions__heading,
+.search-results__title {
+  color: #f2f5fb;
+}
+
+.quick-actions__grid {
+  background: rgba(11,16,27,.72);
+  border-color: rgba(255,255,255,.07);
+  box-shadow: 0 18px 50px rgba(0,0,0,.22);
+}
+
+.quick-action-card:hover {
+  background: rgba(255,255,255,.035);
+}
+
+.quick-action-card__label { color: #dbe1ec; }
+.quick-action-card:not(:last-child)::after { background: rgba(255,255,255,.07); }
+
+.search-results__filters,
+.train-card {
+  background: #0d1320;
+  border-color: rgba(255,255,255,.08);
+}
+
+.search-results__title { color: #f2f5fb; }
+
+.site-footer {
+  background: #03050a;
+  border-top: 1px solid rgba(255,255,255,.06);
+  color: #8994a8;
+}
+
+.site-footer__heading { color: #f0a04a; }
+.site-footer__text,
+.site-footer__links a,
+.site-footer__bottom,
+.site-footer__attribution { color: #7e899d; }
+.site-footer__links a:hover { color: #f5b568; }
+
+@media (max-width: 768px) {
+  .navbar__brand { min-width: 0; }
+  .navbar__brand-logo { width: 34px; height: 34px; }
+  .navbar__brand-subtext { display: none; }
+  .hero__headline { max-width: 12ch; font-size: clamp(2.7rem,12vw,4rem); }
+  .map-preview { border-radius: 18px; }
+  .booking-card { border-radius: 16px; }
+}

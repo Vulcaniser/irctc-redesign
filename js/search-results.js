@@ -178,6 +178,11 @@
           '<span class="train-card__availability">' +
             escapeHTML(passengerCount) +
             (passengerCount === 1 ? " passenger" : " passengers") +
+            ' · ' +
+            (selectedClass
+              ? 'Requested ' + escapeHTML(selectedClass.toUpperCase()) +
+                ' · ' + escapeHTML(selectedClassLabel(selectedClass.toUpperCase()))
+              : 'AC / non-AC classes shown above') +
             ' · Timetable snapshot' +
           '</span>' +
           '<button type="button" class="btn btn--primary" disabled aria-disabled="true">' +

@@ -1,0 +1,2108 @@
+/* ========================================================================== 
+   retouch.css
+   Visual-only finishing layer. Existing map, booking/search logic and
+   animation hooks remain untouched; this file intentionally overrides the
+   presentation layer without rewriting the base system.
+   ========================================================================== */
+
+:root {
+  --retouch-ink: #eef3fb;
+  --retouch-muted: #91a0b6;
+  --retouch-panel: rgba(11, 17, 29, .78);
+  --retouch-panel-strong: rgba(12, 19, 32, .94);
+  --retouch-line: rgba(255,255,255,.075);
+  --retouch-orange: #ef9a3d;
+  --retouch-orange-soft: rgba(239,154,61,.14);
+  --retouch-blue: #6ea0ff;
+}
+
+body {
+  background:
+    radial-gradient(circle at 82% 4%, rgba(55, 91, 154, .10), transparent 26rem),
+    #050810;
+}
+
+/* --------------------------------------------------------------------------
+   Hero: add a photographic railway layer without altering the map itself.
+   -------------------------------------------------------------------------- */
+.hero {
+  isolation: isolate;
+  min-height: 610px;
+  overflow: hidden;
+  background:
+    linear-gradient(115deg, rgba(3,7,15,.98) 0%, rgba(4,9,18,.91) 45%, rgba(4,8,16,.42) 100%),
+    radial-gradient(circle at 75% 48%, rgba(37,71,132,.18), transparent 34rem);
+}
+
+.hero::before {
+  z-index: -3;
+  opacity: .78;
+}
+
+.hero::after {
+  z-index: -2;
+  opacity: .34;
+  background-image:
+    linear-gradient(90deg, transparent 0 49.5%, rgba(239,154,61,.12) 50%, transparent 50.5%),
+    linear-gradient(0deg, transparent 0 49.5%, rgba(255,255,255,.035) 50%, transparent 50.5%);
+  background-size: 84px 84px;
+  mask-image: linear-gradient(90deg, black, transparent 72%);
+}
+
+.hero__content {
+  padding-top: 3.6rem;
+  padding-bottom: 5rem;
+}
+
+.hero__headline {
+  position: relative;
+  font-weight: 650;
+  letter-spacing: -.055em;
+}
+
+.hero__headline::before {
+  content: "RAIL TRAVEL · INDIA";
+  display: block;
+  margin-bottom: 1rem;
+  color: #e99a47;
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .22em;
+}
+
+.hero__subtext {
+  color: #aab5c6;
+  line-height: 1.75;
+}
+
+.hero__visual {
+  position: relative;
+}
+
+.hero__train-photo {
+  position: absolute;
+  right: -3%;
+  top: 4%;
+  width: min(52vw, 700px);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 28px;
+  background: #080d17;
+  box-shadow: 0 30px 100px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.06);
+  transform: rotate(1.2deg);
+  opacity: .84;
+  pointer-events: none;
+}
+
+.hero__train-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(.82) contrast(1.04) brightness(.72);
+}
+
+.hero__train-photo-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #050810 0%, rgba(5,8,16,.48) 43%, rgba(5,8,16,.06) 100%),
+    linear-gradient(0deg, rgba(3,6,12,.82), transparent 48%);
+}
+
+.hero__train-photo::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+}
+
+.hero__train-photo-caption {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #e9eef7;
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.hero__train-photo-caption span:last-child {
+  color: #aab5c6;
+}
+
+/* Preserve the existing India map; only its surrounding composition changes. */
+.map-preview {
+  position: relative;
+  z-index: 2;
+  margin-top: 5rem;
+  background:
+    radial-gradient(circle at 55% 45%, rgba(23,50,105,.32), transparent 50%),
+    rgba(3,6,13,.72);
+  border-color: rgba(116,145,205,.16);
+  box-shadow: 0 28px 80px rgba(0,0,0,.46), inset 0 0 80px rgba(0,0,0,.58);
+}
+
+/* --------------------------------------------------------------------------
+   Section rhythm + quiet editorial labels.
+   -------------------------------------------------------------------------- */
+.section-kicker {
+  display: inline-block;
+  margin-bottom: .45rem;
+  color: var(--retouch-orange);
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.quick-actions {
+  position: relative;
+  padding-top: 5.5rem;
+  padding-bottom: 5rem;
+}
+
+.quick-actions::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(1100px, 86%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.09), transparent);
+  transform: translateX(-50%);
+}
+
+.quick-actions__intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.quick-actions__heading {
+  margin: 0;
+  font-size: clamp(1.55rem, 2.5vw, 2rem);
+  letter-spacing: -.035em;
+}
+
+.quick-actions__hint {
+  max-width: 38ch;
+  margin: 0 0 .2rem;
+  color: var(--retouch-muted);
+  font-size: .88rem;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.quick-actions__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--retouch-line);
+  border-radius: 18px;
+  background: var(--retouch-line);
+  box-shadow: 0 24px 70px rgba(0,0,0,.25);
+}
+
+.quick-action-card {
+  position: relative;
+  min-height: 138px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: .9rem;
+  padding: 1.25rem 1.2rem;
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(145deg, rgba(13,20,33,.96), rgba(8,13,23,.96));
+  color: var(--retouch-ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background .22s ease, transform .22s ease, box-shadow .22s ease;
+}
+
+.quick-action-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(239,154,61,.075), transparent 70%);
+  transform: translateX(-100%);
+  transition: transform .45s ease;
+}
+
+.quick-action-card:hover {
+  z-index: 1;
+  background: linear-gradient(145deg, rgba(19,28,45,.98), rgba(9,15,27,.98));
+  transform: translateY(-2px);
+  box-shadow: 0 16px 35px rgba(0,0,0,.25);
+}
+
+.quick-action-card:hover::before { transform: translateX(100%); }
+
+.quick-action-card:focus-visible {
+  outline: 2px solid rgba(239,154,61,.78);
+  outline-offset: -3px;
+}
+
+.quick-action-card__icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(239,154,61,.22);
+  border-radius: 12px;
+  background: rgba(239,154,61,.07);
+  color: #f5b568;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.quick-action-card__copy {
+  display: flex;
+  flex-direction: column;
+  gap: .28rem;
+  min-width: 0;
+}
+
+.quick-action-card__label {
+  color: #eef3fb;
+  font-size: .91rem;
+  font-weight: 650;
+}
+
+.quick-action-card__meta {
+  color: #77869d;
+  font-size: .72rem;
+  line-height: 1.35;
+}
+
+.quick-action-card__arrow {
+  color: #687991;
+  font-size: 1.1rem;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.quick-action-card:hover .quick-action-card__arrow {
+  color: #f1ad60;
+  transform: translate(2px,-2px);
+}
+
+/* --------------------------------------------------------------------------
+   Quick Action modal: functional, but deliberately compact and product-like.
+   -------------------------------------------------------------------------- */
+.quick-action-open { overflow: hidden; }
+
+.quick-action-panel[hidden] { display: none; }
+
+.quick-action-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease;
+}
+
+.quick-action-panel.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.quick-action-panel__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(1,4,9,.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.quick-action-panel__dialog {
+  position: relative;
+  width: min(540px, 100%);
+  padding: 2rem;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 22px;
+  background: linear-gradient(150deg, rgba(19,27,42,.98), rgba(7,12,22,.98));
+  box-shadow: 0 35px 100px rgba(0,0,0,.52), inset 0 1px 0 rgba(255,255,255,.045);
+  transform: translateY(10px) scale(.985);
+  transition: transform .22s cubic-bezier(.2,.8,.2,1);
+}
+
+.quick-action-panel.is-visible .quick-action-panel__dialog {
+  transform: translateY(0) scale(1);
+}
+
+.quick-action-panel__dialog h2 {
+  margin: 0;
+  color: #f3f6fb;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  letter-spacing: -.035em;
+}
+
+.quick-action-panel__dialog > p {
+  margin: .7rem 0 1.4rem;
+  color: #96a4b8;
+  line-height: 1.65;
+  font-size: .9rem;
+}
+
+.quick-action-panel__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 10px;
+  background: rgba(255,255,255,.035);
+  color: #b6c0cf;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.quick-action-panel__close:hover { background: rgba(255,255,255,.07); color: #fff; }
+
+.quick-action-panel__form { display: grid; gap: .65rem; }
+.quick-action-panel__form label { color: #aab5c6; font-size: .75rem; font-weight: 650; }
+
+.quick-action-panel__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .65rem;
+}
+
+.quick-action-panel__row input,
+.quick-action-panel__form > input {
+  min-width: 0;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 .9rem;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 11px;
+  outline: 0;
+  background: #080e19;
+  color: #f4f7fd;
+}
+
+.quick-action-panel__row input:focus { border-color: rgba(239,154,61,.62); box-shadow: 0 0 0 3px rgba(239,154,61,.1); }
+.quick-action-panel__row input.is-invalid { border-color: #e67562; }
+.quick-action-panel__form small { color: #65758d; line-height: 1.5; }
+
+.quick-action-panel__empty {
+  display: grid;
+  justify-items: center;
+  gap: .45rem;
+  padding: 1.2rem;
+  border: 1px dashed rgba(255,255,255,.1);
+  border-radius: 14px;
+  color: #8795a9;
+  text-align: center;
+}
+.quick-action-panel__empty strong { color: #e8edf5; }
+.quick-action-panel__empty span:first-child { color: #f0a95a; font-size: 1.5rem; }
+.quick-action-panel__empty .btn { margin-top: .55rem; }
+
+.quick-action-panel__help-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: .6rem;
+}
+
+.quick-action-panel__help-grid button {
+  min-height: 48px;
+  padding: .75rem .8rem;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 11px;
+  background: rgba(255,255,255,.025);
+  color: #d9e0eb;
+  cursor: pointer;
+  text-align: left;
+}
+.quick-action-panel__help-grid button:hover { border-color: rgba(239,154,61,.35); background: rgba(239,154,61,.055); }
+
+/* --------------------------------------------------------------------------
+   Search result area: improve hierarchy without changing result markup/data.
+   -------------------------------------------------------------------------- */
+.search-results {
+  position: relative;
+  padding-top: 4.5rem;
+  padding-bottom: 5rem;
+}
+
+.search-results__header {
+  position: relative;
+  padding: 1.2rem 0 1.5rem;
+}
+
+.search-results__header::before {
+  content: "LIVE INVENTORY VIEW";
+  display: block;
+  margin-bottom: .45rem;
+  color: #e99a47;
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+}
+
+.train-card {
+  position: relative;
+  overflow: hidden;
+  border-left-width: 3px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #101827, #090f1a);
+  box-shadow: 0 18px 45px rgba(0,0,0,.18);
+}
+
+.train-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(239,154,61,.08), transparent 68%);
+  pointer-events: none;
+}
+
+.train-card__name { letter-spacing: -.02em; }
+.train-card__number { font-family: var(--font-family-mono, ui-monospace, monospace); letter-spacing: .04em; }
+.train-card__time { letter-spacing: -.04em; }
+
+/* A small rail-line flourish under the journey timeline. */
+.train-card__duration::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border: 2px solid #ef9a3d;
+  border-radius: 50%;
+  background: #0d1320;
+  transform: translate(-50%, -50%);
+}
+
+/* Footer polish */
+.site-footer {
+  position: relative;
+  overflow: hidden;
+}
+.site-footer::after {
+  content: "";
+  position: absolute;
+  right: -80px;
+  bottom: -130px;
+  width: 360px;
+  height: 360px;
+  border: 1px solid rgba(239,154,61,.08);
+  border-radius: 50%;
+  box-shadow: 0 0 0 40px rgba(239,154,61,.018), 0 0 0 80px rgba(239,154,61,.012);
+  pointer-events: none;
+}
+
+@media (max-width: 980px) {
+  .hero__train-photo { right: -10%; width: 62vw; opacity: .55; }
+  .quick-actions__grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 768px) {
+  .hero { min-height: 560px; }
+  .hero__content { padding-top: 2.2rem; padding-bottom: 3.5rem; }
+  .hero__train-photo { right: -25%; top: 20%; width: 88vw; opacity: .34; transform: rotate(0); }
+  .map-preview { margin-top: 2.5rem; }
+  .quick-actions { padding-top: 4rem; padding-bottom: 4rem; }
+  .quick-actions__intro { align-items: start; flex-direction: column; gap: .55rem; }
+  .quick-actions__hint { text-align: left; }
+  .quick-action-card { min-height: 116px; }
+}
+
+@media (max-width: 520px) {
+  .quick-actions__grid { grid-template-columns: 1fr; }
+  .quick-action-panel { padding: .8rem; }
+  .quick-action-panel__dialog { padding: 1.35rem; border-radius: 18px; }
+  .quick-action-panel__row { grid-template-columns: 1fr; }
+  .quick-action-panel__help-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-action-card,
+  .quick-action-card::before,
+  .quick-action-card__arrow,
+  .quick-action-panel,
+  .quick-action-panel__dialog { transition: none; }
+}
+
+/* ========================================================================== 
+   MAP-FIRST HERO RETOUCH
+   The route canvas is the visual identity of the product. This section
+   deliberately removes the photographic hero treatment and gives the
+   existing map-preview its own instrument-like surface. No map SVG,
+   route data, or route-preview behavior is changed here.
+   ========================================================================== */
+
+.hero {
+  min-height: 650px;
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  overflow: visible;
+  background:
+    radial-gradient(circle at 70% 50%, rgba(44, 76, 132, .11), transparent 31rem),
+    linear-gradient(180deg, #050810 0%, #060b14 100%);
+}
+
+.hero::after {
+  opacity: .18;
+  background-size: 96px 96px;
+  mask-image: linear-gradient(90deg, transparent, black 45%, black 82%, transparent);
+}
+
+.hero__content {
+  flex-basis: 43%;
+  max-width: 540px;
+  padding-block: 2rem;
+}
+
+.hero__headline {
+  max-width: 10ch;
+}
+
+.hero__visual {
+  flex-basis: 57%;
+  align-self: stretch;
+  min-height: 590px;
+  display: flex;
+  align-items: center;
+}
+
+/* The map is now a distinct product surface rather than a background layer. */
+.map-stage {
+  position: relative;
+  width: min(100%, 610px);
+  margin-inline: auto;
+  padding: 14px;
+  border: 1px solid rgba(132, 158, 205, .17);
+  border-radius: 26px;
+  background:
+    linear-gradient(145deg, rgba(18, 27, 43, .94), rgba(5, 9, 17, .98));
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, .42),
+    inset 0 1px 0 rgba(255,255,255,.045);
+  isolation: isolate;
+}
+
+.map-stage::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: 25px;
+  background:
+    linear-gradient(90deg, transparent 0 49.8%, rgba(231, 157, 71, .045) 50%, transparent 50.2%),
+    linear-gradient(0deg, transparent 0 49.8%, rgba(113, 149, 212, .045) 50%, transparent 50.2%);
+  background-size: 74px 74px;
+  mask-image: linear-gradient(180deg, black, transparent 85%);
+  pointer-events: none;
+}
+
+.map-stage__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 58px;
+  padding: 2px 8px 12px;
+}
+
+.map-stage__eyebrow {
+  display: block;
+  margin-bottom: .32rem;
+  color: #e99a47;
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: .61rem;
+  font-weight: 700;
+  letter-spacing: .19em;
+}
+
+.map-stage__title {
+  margin: 0;
+  color: #eef3fb;
+  font-size: 1.02rem;
+  font-weight: 650;
+  letter-spacing: -.015em;
+}
+
+.map-stage__status {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .42rem .62rem;
+  border: 1px solid rgba(255,255,255,.075);
+  border-radius: 999px;
+  background: rgba(5, 9, 17, .62);
+  color: #8290a7;
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: .58rem;
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+
+.map-stage__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7faeff;
+  box-shadow: 0 0 0 4px rgba(127,174,255,.08), 0 0 12px rgba(127,174,255,.48);
+  animation: map-stage-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes map-stage-pulse {
+  0%, 100% { opacity: .55; transform: scale(.88); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+.map-stage > .map-preview {
+  margin: 0;
+  max-height: 500px;
+  aspect-ratio: 1280 / 1400;
+  border: 1px solid rgba(120, 151, 210, .19);
+  border-radius: 19px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(35, 63, 116, .22), transparent 47%),
+    #02050b;
+  box-shadow:
+    inset 0 0 70px rgba(0,0,0,.68),
+    inset 0 1px 0 rgba(255,255,255,.025),
+    0 14px 36px rgba(0,0,0,.25);
+}
+
+/* Keep the vector map itself visually crisp while letting the route own the
+   brighter accents when route-preview.js changes data-state. */
+.map-stage > .map-preview .map-outline {
+  opacity: .56;
+}
+
+.map-stage > .map-preview .map-network-line {
+  opacity: .22;
+}
+
+.map-stage > .map-preview[data-state="active"] .map-outline,
+.map-stage > .map-preview[data-state="unsupported-route"] .map-outline {
+  opacity: .44;
+}
+
+.map-stage__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 11px 8px 2px;
+}
+
+.map-stage__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .8rem 1rem;
+  color: #718098;
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: .55rem;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+.map-stage__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+.map-stage__legend-line {
+  display: inline-block;
+  width: 17px;
+  height: 2px;
+  border-radius: 99px;
+}
+
+.map-stage__legend-line--network { background: #58749f; opacity: .65; }
+.map-stage__legend-line--route { background: #e99a47; box-shadow: 0 0 8px rgba(233,154,71,.35); }
+
+.map-stage__legend-dot {
+  width: 6px;
+  height: 6px;
+  border: 1px solid #7faeff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(127,174,255,.25);
+}
+
+.map-stage__hint {
+  color: #58667d;
+  font-size: .67rem;
+  line-height: 1.4;
+  text-align: right;
+}
+
+@media (max-width: 980px) {
+  .hero {
+    gap: 2rem;
+  }
+
+  .hero__visual {
+    min-height: 530px;
+  }
+
+  .map-stage {
+    width: min(100%, 560px);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    overflow: hidden;
+    gap: 1rem;
+  }
+
+  .hero__content {
+    padding-top: 2.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .hero__visual {
+    width: 100%;
+    min-height: 0;
+    align-self: auto;
+  }
+
+  .map-stage {
+    width: 100%;
+    padding: 10px;
+    border-radius: 21px;
+  }
+
+  .map-stage__header {
+    padding-inline: 5px;
+  }
+
+  .map-stage__footer {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-inline: 5px;
+  }
+
+  .map-stage__hint {
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-stage__status-dot { animation: none; }
+}
+
+/* ========================================================================== 
+   RAILWAY MOMENTS
+   A small editorial image section lower on the page. It is intentionally
+   independent from the map, route preview and booking/search systems.
+   ========================================================================== */
+.railway-moments {
+  position: relative;
+  padding: 1rem 0 5.75rem;
+}
+
+.railway-moments::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(1100px, 86%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.075), transparent);
+  transform: translateX(-50%);
+}
+
+.railway-moments__intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.7rem;
+}
+
+.railway-moments__heading {
+  max-width: 20ch;
+  margin: 0;
+  color: #eef3fb;
+  font-size: clamp(1.5rem, 2.6vw, 2.05rem);
+  font-weight: 650;
+  letter-spacing: -.04em;
+  line-height: 1.08;
+}
+
+.railway-moments__hint {
+  max-width: 43ch;
+  margin: 0 0 .2rem;
+  color: #7f8da3;
+  font-size: .82rem;
+  line-height: 1.65;
+  text-align: right;
+}
+
+.railway-moments__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, .825fr);
+  grid-template-rows: auto auto;
+  gap: 12px;
+}
+
+.railway-moment {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.075);
+  border-radius: 19px;
+  background: linear-gradient(145deg, rgba(14,21,34,.94), rgba(7,12,21,.97));
+  box-shadow: 0 22px 55px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+.railway-moment--wide {
+  grid-row: 1 / span 2;
+}
+
+.railway-moment__image {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 8.7;
+  background: #080d17;
+}
+
+.railway-moment--wide .railway-moment__image {
+  aspect-ratio: 16 / 8.1;
+}
+
+.railway-moment__image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(3,7,14,.03), rgba(3,7,14,.55));
+  pointer-events: none;
+}
+
+.railway-moment__image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: saturate(.78) contrast(1.03) brightness(.76);
+  transform: scale(1.015);
+  transition: transform .55s cubic-bezier(.2,.7,.2,1), filter .35s ease;
+}
+
+.railway-moment:hover .railway-moment__image img,
+.railway-moment:focus-within .railway-moment__image img {
+  transform: scale(1.045);
+  filter: saturate(.92) contrast(1.04) brightness(.83);
+}
+
+.railway-moment__body {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem 1.05rem;
+}
+
+.railway-moment__eyebrow {
+  display: block;
+  margin-bottom: .38rem;
+  color: #e49a4c;
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: .57rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+
+.railway-moment h3 {
+  margin: 0;
+  color: #eaf0f8;
+  font-size: .98rem;
+  font-weight: 650;
+  letter-spacing: -.015em;
+}
+
+.railway-moment p {
+  max-width: 48ch;
+  margin: .42rem 0 0;
+  color: #77869d;
+  font-size: .73rem;
+  line-height: 1.55;
+}
+
+.railway-moment__code {
+  flex: 0 0 auto;
+  color: #56657b;
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: .55rem;
+  letter-spacing: .09em;
+  white-space: nowrap;
+}
+
+.railway-moments__credit {
+  margin: .65rem 0 0;
+  color: #4f5d72;
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: .54rem;
+  letter-spacing: .045em;
+  text-align: right;
+}
+
+@media (max-width: 980px) {
+  .railway-moments__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .railway-moment--wide {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .railway-moment--wide .railway-moment__image {
+    aspect-ratio: 16 / 7.2;
+  }
+}
+
+@media (max-width: 680px) {
+  .railway-moments {
+    padding-bottom: 4.5rem;
+  }
+  .railway-moments__intro {
+    align-items: start;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .railway-moments__hint {
+    max-width: 48ch;
+    text-align: left;
+  }
+  .railway-moments__grid {
+    grid-template-columns: 1fr;
+  }
+  .railway-moment--wide {
+    grid-column: auto;
+  }
+  .railway-moment__body {
+    align-items: start;
+    flex-direction: column;
+  }
+  .railway-moment__code {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .railway-moment__image img { transition: none; }
+}
+
+/* ========================================================================== 
+   PAGE FLOW / COMPACT NETWORK SECTION
+   The railway-moments section intentionally sits after Available Trains so
+   the primary journey flow stays: route preview -> booking -> quick actions
+   -> available trains -> across the network -> footer. The map/route-preview
+   system above is not changed.
+   ========================================================================== */
+
+.railway-moments {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 1.15rem 1.25rem 4rem;
+}
+
+.railway-moments__intro {
+  gap: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.railway-moments__heading {
+  max-width: 22ch;
+  font-size: clamp(1.35rem, 2.35vw, 1.9rem);
+}
+
+.railway-moments__hint {
+  max-width: 39ch;
+  font-size: .76rem;
+  line-height: 1.55;
+}
+
+.railway-moments__grid {
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, .82fr);
+  gap: 10px;
+}
+
+.railway-moment {
+  border-radius: 16px;
+}
+
+.railway-moment__image {
+  aspect-ratio: 16 / 7.2;
+}
+
+.railway-moment--wide .railway-moment__image {
+  aspect-ratio: 16 / 7.55;
+}
+
+.railway-moment__body {
+  padding: .78rem .95rem .82rem;
+}
+
+.railway-moment__eyebrow {
+  margin-bottom: .28rem;
+  font-size: .53rem;
+}
+
+.railway-moment h3 {
+  font-size: .91rem;
+}
+
+.railway-moment p {
+  margin-top: .3rem;
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+.railway-moment__code {
+  font-size: .5rem;
+}
+
+.railway-moments__credit {
+  margin-top: .5rem;
+  font-size: .5rem;
+}
+
+/* Keep the section compact while preserving the editorial composition. */
+@media (max-width: 980px) {
+  .railway-moments {
+    padding-inline: 1.25rem;
+  }
+
+  .railway-moments__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .railway-moment--wide {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .railway-moment--wide .railway-moment__image {
+    aspect-ratio: 16 / 6.4;
+  }
+
+  .railway-moment:not(.railway-moment--wide) .railway-moment__image {
+    aspect-ratio: 16 / 7;
+  }
+}
+
+@media (max-width: 768px) {
+  .railway-moments {
+    padding-top: .9rem;
+    padding-bottom: 3.25rem;
+  }
+
+  .railway-moments__intro {
+    margin-bottom: 1rem;
+  }
+
+  .railway-moments__heading {
+    max-width: 24ch;
+    font-size: clamp(1.35rem, 5vw, 1.7rem);
+  }
+
+  .railway-moments__hint {
+    font-size: .72rem;
+  }
+
+  .railway-moments__grid {
+    gap: 9px;
+  }
+}
+
+@media (max-width: 680px) {
+  .railway-moments {
+    padding-inline: 1rem;
+  }
+
+  .railway-moments__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .railway-moment--wide {
+    grid-column: auto;
+  }
+
+  .railway-moment__image,
+  .railway-moment--wide .railway-moment__image,
+  .railway-moment:not(.railway-moment--wide) .railway-moment__image {
+    aspect-ratio: 16 / 8;
+  }
+
+  .railway-moment__body {
+    padding: .75rem .85rem .8rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .railway-moments {
+    padding-inline: .85rem;
+  }
+
+  .railway-moment__image,
+  .railway-moment--wide .railway-moment__image,
+  .railway-moment:not(.railway-moment--wide) .railway-moment__image {
+    aspect-ratio: 16 / 8.5;
+  }
+
+  .railway-moment p {
+    font-size: .66rem;
+  }
+}
+
+/* ==========================================================================
+   THEME SYSTEM
+   Dark mode is the intentional default. Light mode is opt-in through the
+   floating theme control; the route-preview/map system remains structurally
+   and behaviorally untouched.
+   ========================================================================== */
+
+html {
+  color-scheme: dark;
+}
+
+body,
+.navbar,
+.hero,
+.booking-card,
+.quick-action-card,
+.search-results__filters,
+.train-card,
+.railway-moment,
+.site-footer,
+.form-field__input,
+.booking-form__stations .form-field,
+.quick-action-panel__dialog {
+  transition:
+    background-color .72s cubic-bezier(.22,.61,.36,1),
+    background .72s cubic-bezier(.22,.61,.36,1),
+    border-color .62s cubic-bezier(.22,.61,.36,1),
+    color .62s cubic-bezier(.22,.61,.36,1),
+    box-shadow .72s cubic-bezier(.22,.61,.36,1);
+}
+
+/* Floating control */
+.theme-toggle {
+  position: fixed;
+  right: clamp(16px, 2.2vw, 30px);
+  bottom: clamp(16px, 2.2vw, 30px);
+  z-index: 1000;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 50%;
+  background: rgba(9,14,24,.88);
+  color: #f7c66f;
+  box-shadow: 0 14px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform .28s cubic-bezier(.2,.8,.2,1),
+              background .62s cubic-bezier(.22,.61,.36,1),
+              border-color .62s cubic-bezier(.22,.61,.36,1),
+              color .62s cubic-bezier(.22,.61,.36,1),
+              box-shadow .62s cubic-bezier(.22,.61,.36,1);
+}
+
+.theme-toggle::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(239,154,61,.16), transparent 68%);
+  opacity: .8;
+  z-index: -1;
+  transition: opacity .55s cubic-bezier(.22,.61,.36,1), transform .55s cubic-bezier(.22,.61,.36,1);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-3px) rotate(8deg);
+  border-color: rgba(239,154,61,.55);
+  box-shadow: 0 18px 42px rgba(0,0,0,.42), 0 0 24px rgba(239,154,61,.08);
+}
+
+.theme-toggle:active {
+  transform: translateY(0) scale(.94);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid #ef9a3d;
+  outline-offset: 4px;
+}
+
+.theme-toggle__icon {
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  display: grid;
+  place-items: center;
+  transition: transform .62s cubic-bezier(.16,1,.3,1), opacity .42s cubic-bezier(.22,.61,.36,1);
+}
+
+.theme-toggle__icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-toggle__icon--moon {
+  opacity: 0;
+  transform: translateY(16px) rotate(-45deg) scale(.7);
+}
+
+.theme-toggle__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Light mode -------------------------------------------------------------- */
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html[data-theme="light"] body {
+  background:
+    radial-gradient(circle at 86% 5%, rgba(226,168,83,.12), transparent 25rem),
+    #f5f1e9;
+  color: #24211d;
+}
+
+html[data-theme="light"] .theme-toggle {
+  background: rgba(255,252,246,.94);
+  color: #243b66;
+  border-color: rgba(31,48,79,.14);
+  box-shadow: 0 14px 36px rgba(42,45,50,.16), inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+html[data-theme="light"] .theme-toggle::before {
+  background: radial-gradient(circle, rgba(64,105,168,.12), transparent 68%);
+}
+
+html[data-theme="light"] .theme-toggle__icon--sun {
+  opacity: 0;
+  transform: translateY(-16px) rotate(45deg) scale(.7);
+}
+
+html[data-theme="light"] .theme-toggle__icon--moon {
+  opacity: 1;
+  transform: translateY(0) rotate(0) scale(1);
+}
+
+html[data-theme="light"] .navbar {
+  background: rgba(250,248,243,.88);
+  border-bottom-color: rgba(34,45,62,.10);
+  box-shadow: 0 8px 30px rgba(48,54,64,.08);
+}
+
+html[data-theme="light"] .navbar__brand-text {
+  color: #b45c18;
+}
+
+html[data-theme="light"] .navbar__brand-subtext,
+html[data-theme="light"] .navbar__link {
+  color: #657187;
+}
+
+html[data-theme="light"] .navbar__link:hover,
+html[data-theme="light"] .navbar__link[aria-current="page"],
+html[data-theme="light"] .navbar__link--active {
+  color: #18253a;
+}
+
+html[data-theme="light"] .navbar__link::after {
+  background: #c96d23;
+}
+
+html[data-theme="light"] .navbar__clock {
+  color: #526075;
+  border-color: rgba(31,48,79,.12);
+  background: rgba(255,255,255,.48);
+}
+
+html[data-theme="light"] .navbar__clock-time {
+  color: #1c2a40;
+}
+
+html[data-theme="light"] .navbar__clock-zone {
+  color: #b45c18;
+}
+
+html[data-theme="light"] .btn--outline {
+  background: rgba(255,255,255,.48);
+  border-color: rgba(31,48,79,.15);
+  color: #24334b;
+}
+
+html[data-theme="light"] .btn--outline:hover {
+  background: rgba(201,109,35,.08);
+  border-color: rgba(201,109,35,.45);
+  color: #9f4f13;
+}
+
+/* Hero becomes a warm daylight editorial surface. The map stage itself
+   deliberately remains dark: it is the product's route-instrument identity. */
+html[data-theme="light"] .hero {
+  color: #1d2737;
+  background:
+    radial-gradient(circle at 72% 50%, rgba(70,111,171,.10), transparent 32rem),
+    linear-gradient(180deg, #f7f3eb 0%, #eee9df 100%);
+}
+
+html[data-theme="light"] .hero::before {
+  opacity: .08;
+}
+
+html[data-theme="light"] .hero::after {
+  opacity: .10;
+  background-image:
+    linear-gradient(90deg, transparent 0 49.5%, rgba(201,109,35,.10) 50%, transparent 50.5%),
+    linear-gradient(0deg, transparent 0 49.5%, rgba(38,62,96,.045) 50%, transparent 50.5%);
+}
+
+html[data-theme="light"] .hero__headline {
+  color: #172236;
+  text-shadow: none;
+}
+
+html[data-theme="light"] .hero__headline::after {
+  background: linear-gradient(90deg,#c96d23,rgba(201,109,35,0));
+}
+
+html[data-theme="light"] .hero__subtext {
+  color: #647086;
+}
+
+html[data-theme="light"] .section-kicker {
+  color: #b45c18;
+}
+
+/* Route preview: preserve its dark instrument-panel identity in both themes. */
+html[data-theme="light"] .map-stage {
+  border-color: rgba(52,76,113,.16);
+  box-shadow: 0 30px 70px rgba(47,56,72,.18), inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+html[data-theme="light"] .map-stage__eyebrow,
+html[data-theme="light"] .map-stage__legend-line--route {
+  color: #e99a47;
+}
+
+html[data-theme="light"] .map-stage__title {
+  color: #eef3fb;
+}
+
+html[data-theme="light"] .map-stage__status {
+  border-color: rgba(255,255,255,.075);
+  background: rgba(5,9,17,.62);
+  color: #8290a7;
+}
+
+html[data-theme="light"] .map-stage__hint,
+html[data-theme="light"] .map-stage__legend {
+  color: #687892;
+}
+
+/* Booking */
+html[data-theme="light"] .booking-card {
+  background: linear-gradient(145deg, rgba(255,253,249,.98), rgba(246,241,232,.98));
+  border-color: rgba(43,53,68,.12);
+  box-shadow: 0 28px 70px rgba(51,57,65,.16), inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+html[data-theme="light"] .booking-tabs {
+  border-bottom-color: rgba(43,53,68,.10);
+}
+
+html[data-theme="light"] .booking-tabs__tab {
+  color: #7b8493;
+}
+
+html[data-theme="light"] .booking-tabs__tab:hover {
+  color: #26364f;
+  background: rgba(201,109,35,.06);
+}
+
+html[data-theme="light"] .booking-tabs__tab--active,
+html[data-theme="light"] .booking-tabs__tab[aria-selected="true"] {
+  color: #a95518;
+  background: rgba(201,109,35,.09);
+}
+
+html[data-theme="light"] .form-field label {
+  color: #687286;
+}
+
+html[data-theme="light"] .form-field__input {
+  color: #202c40;
+  background: #fffdfa;
+  border-color: rgba(46,59,79,.15);
+}
+
+html[data-theme="light"] .form-field__input::placeholder {
+  color: #9aa2ae;
+}
+
+html[data-theme="light"] .form-field__input:hover {
+  border-color: rgba(46,59,79,.25);
+}
+
+html[data-theme="light"] .form-field__input:focus,
+html[data-theme="light"] .form-field__input:focus-visible {
+  border-color: rgba(201,109,35,.65);
+  box-shadow: 0 0 0 3px rgba(201,109,35,.10), 0 0 22px rgba(201,109,35,.06);
+}
+
+html[data-theme="light"] .booking-form__stations .form-field {
+  background: linear-gradient(145deg,#fffdfa,#f5f0e7);
+  border-color: rgba(46,59,79,.11);
+}
+
+html[data-theme="light"] .booking-form__stations .form-field:focus-within {
+  background: #fffdfa;
+  border-color: rgba(201,109,35,.48);
+}
+
+html[data-theme="light"] .booking-form__stations .form-field__input {
+  color: #202c40;
+}
+
+html[data-theme="light"] .btn-icon.swap-btn {
+  border-color: rgba(46,59,79,.16);
+}
+
+html[data-theme="light"] .btn--primary {
+  box-shadow: 0 12px 30px rgba(168,83,19,.16);
+}
+
+/* Quick actions */
+html[data-theme="light"] .quick-actions::before,
+html[data-theme="light"] .railway-moments::before {
+  background: linear-gradient(90deg, transparent, rgba(43,53,68,.12), transparent);
+}
+
+html[data-theme="light"] .quick-actions__heading,
+html[data-theme="light"] .search-results__title {
+  color: #1e2a3d;
+}
+
+html[data-theme="light"] .quick-actions__hint {
+  color: #707b8d;
+}
+
+html[data-theme="light"] .quick-actions__grid {
+  background: rgba(45,55,70,.10);
+  border-color: rgba(43,53,68,.10);
+  box-shadow: 0 18px 50px rgba(50,56,64,.10);
+}
+
+html[data-theme="light"] .quick-action-card {
+  background: linear-gradient(145deg,#fffdf9,#f3eee5);
+  color: #27344a;
+}
+
+html[data-theme="light"] .quick-action-card::before {
+  background: linear-gradient(120deg, transparent 30%, rgba(201,109,35,.06), transparent 70%);
+}
+
+html[data-theme="light"] .quick-action-card:hover {
+  background: linear-gradient(145deg,#fffefa,#f8f1e6);
+  box-shadow: 0 16px 35px rgba(49,56,66,.12);
+}
+
+html[data-theme="light"] .quick-action-card__icon {
+  border-color: rgba(201,109,35,.22);
+  background: rgba(201,109,35,.07);
+  color: #b45c18;
+}
+
+html[data-theme="light"] .quick-action-card__label {
+  color: #29364a;
+}
+
+html[data-theme="light"] .quick-action-card__meta {
+  color: #7b8698;
+}
+
+html[data-theme="light"] .quick-action-card__arrow {
+  color: #788396;
+}
+
+html[data-theme="light"] .quick-action-card:hover .quick-action-card__arrow {
+  color: #b45c18;
+}
+
+html[data-theme="light"] .quick-action-card:not(:last-child)::after {
+  background: rgba(43,53,68,.10);
+}
+
+/* Search/results */
+html[data-theme="light"] .search-results {
+  color: #253249;
+}
+
+html[data-theme="light"] .search-results__header::before {
+  color: #b45c18;
+}
+
+html[data-theme="light"] .search-results__filters,
+html[data-theme="light"] .train-card {
+  background: linear-gradient(145deg,#fffdf9,#f4efe6);
+  border-color: rgba(43,53,68,.12);
+  box-shadow: 0 18px 45px rgba(47,53,62,.10);
+}
+
+html[data-theme="light"] .train-card::after {
+  background: radial-gradient(circle, rgba(201,109,35,.08), transparent 68%);
+}
+
+html[data-theme="light"] .train-card__fare {
+  color: #294a7b;
+}
+
+html[data-theme="light"] .train-card__class-option {
+  background: rgba(255,255,255,.52);
+  border-color: rgba(43,53,68,.12);
+}
+
+html[data-theme="light"] .quick-action-panel__backdrop {
+  background: rgba(28,34,43,.38);
+}
+
+html[data-theme="light"] .quick-action-panel__dialog {
+  border-color: rgba(43,53,68,.12);
+  background: linear-gradient(150deg,#fffdf9,#f1ece3);
+  box-shadow: 0 35px 90px rgba(40,45,53,.22), inset 0 1px 0 rgba(255,255,255,.85);
+}
+
+html[data-theme="light"] .quick-action-panel__dialog h2 {
+  color: #202d42;
+}
+
+html[data-theme="light"] .quick-action-panel__dialog > p,
+html[data-theme="light"] .quick-action-panel__form label {
+  color: #6d7789;
+}
+
+html[data-theme="light"] .quick-action-panel__close {
+  border-color: rgba(43,53,68,.12);
+  background: rgba(43,53,68,.035);
+  color: #667286;
+}
+
+html[data-theme="light"] .quick-action-panel__row input,
+html[data-theme="light"] .quick-action-panel__form > input {
+  background: #fffdfa;
+  border-color: rgba(43,53,68,.13);
+  color: #202d42;
+}
+
+html[data-theme="light"] .quick-action-panel__empty {
+  border-color: rgba(43,53,68,.14);
+  color: #788294;
+}
+
+html[data-theme="light"] .quick-action-panel__empty strong {
+  color: #26344a;
+}
+
+/* Across the network */
+html[data-theme="light"] .railway-moments__heading {
+  color: #202c40;
+}
+
+html[data-theme="light"] .railway-moments__hint {
+  color: #707b8d;
+}
+
+html[data-theme="light"] .railway-moment {
+  border-color: rgba(43,53,68,.11);
+  background: linear-gradient(145deg,#fffdf9,#f1ece3);
+  box-shadow: 0 22px 55px rgba(48,54,62,.10), inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+html[data-theme="light"] .railway-moment__image {
+  background: #e8e1d5;
+}
+
+html[data-theme="light"] .railway-moment__image::after {
+  background: linear-gradient(180deg, rgba(3,7,14,.01), rgba(3,7,14,.28));
+}
+
+html[data-theme="light"] .railway-moment__image img {
+  filter: saturate(.86) contrast(1.02) brightness(.93);
+}
+
+html[data-theme="light"] .railway-moment:hover .railway-moment__image img,
+html[data-theme="light"] .railway-moment:focus-within .railway-moment__image img {
+  filter: saturate(.98) contrast(1.03) brightness(1);
+}
+
+html[data-theme="light"] .railway-moment__eyebrow {
+  color: #b45c18;
+}
+
+html[data-theme="light"] .railway-moment h3 {
+  color: #28364b;
+}
+
+html[data-theme="light"] .railway-moment p {
+  color: #707b8d;
+}
+
+html[data-theme="light"] .railway-moment__code,
+html[data-theme="light"] .railway-moments__credit {
+  color: #7c8798;
+}
+
+/* Footer becomes a lighter bookend rather than a second dark mode block. */
+html[data-theme="light"] .site-footer {
+  background: #e8e2d8;
+  border-top-color: rgba(43,53,68,.10);
+  color: #677286;
+}
+
+html[data-theme="light"] .site-footer__heading {
+  color: #a95518;
+}
+
+html[data-theme="light"] .site-footer__text,
+html[data-theme="light"] .site-footer__links a,
+html[data-theme="light"] .site-footer__bottom,
+html[data-theme="light"] .site-footer__attribution {
+  color: #6c7789;
+}
+
+html[data-theme="light"] .site-footer__links a:hover {
+  color: #9f4f13;
+}
+
+html[data-theme="light"] .site-footer__bottom {
+  border-top-color: rgba(43,53,68,.10);
+}
+
+/* Theme transition overlay. JS animates its circular reveal from the toggle. */
+.theme-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+  background: #f5f1e9;
+  clip-path: circle(0 at 50% 50%);
+}
+
+html[data-theme="light"] .theme-transition {
+  background: #f5f1e9;
+}
+
+@media (max-width: 768px) {
+  .theme-toggle {
+    width: 48px;
+    height: 48px;
+    right: 14px;
+    bottom: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .navbar,
+  .hero,
+  .booking-card,
+  .quick-action-card,
+  .search-results__filters,
+  .train-card,
+  .railway-moment,
+  .site-footer,
+  .form-field__input,
+  .booking-form__stations .form-field,
+  .quick-action-panel__dialog,
+  .theme-toggle,
+  .theme-toggle__icon {
+    transition: none !important;
+  }
+
+  .theme-transition {
+    display: none;
+  }
+}
+
+/* ==========================================================================\n   SERVICES + FOOTER INFO\n   New functionality only; existing theme toggle, route preview and booking\n   styles remain untouched.\n   ========================================================================== */
+.services {
+  width: min(var(--container-max-width), calc(100% - 2 * var(--space-5)));
+  margin-inline: auto;
+  padding: 5rem 0 4.5rem;
+  position: relative;
+}
+
+.services::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,181,104,.18), transparent);
+}
+
+.services__intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.8rem;
+}
+
+.services__heading {
+  margin-top: .35rem;
+  font-family: var(--font-family-display);
+  font-size: clamp(1.8rem, 3vw, 2.65rem);
+  color: #f2f5fb;
+  letter-spacing: -.03em;
+}
+
+.services__hint {
+  max-width: 36rem;
+  color: #8a94a6;
+  line-height: 1.7;
+  font-size: .92rem;
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .8rem;
+}
+
+.service-card {
+  min-height: 132px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: .9rem;
+  padding: 1.05rem;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgba(22,29,42,.94), rgba(13,18,29,.94));
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 16px 40px rgba(0,0,0,.13), inset 0 1px 0 rgba(255,255,255,.025);
+  transition: transform .28s cubic-bezier(.22,.61,.36,1), border-color .28s ease, background .28s ease, box-shadow .28s ease;
+}
+
+.service-card:hover,
+.service-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(245,181,104,.27);
+  background: linear-gradient(145deg, rgba(27,35,49,.98), rgba(16,22,34,.98));
+  box-shadow: 0 20px 48px rgba(0,0,0,.2), 0 0 0 1px rgba(245,181,104,.04);
+  outline: none;
+}
+
+.service-card__icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: .8rem;
+  background: rgba(245,160,74,.09);
+  border: 1px solid rgba(245,160,74,.16);
+  color: #f0a04a;
+}
+
+.service-card__icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.service-card strong,
+.service-card small {
+  display: block;
+}
+
+.service-card strong {
+  color: #eef2f8;
+  font-size: .91rem;
+  font-weight: 650;
+}
+
+.service-card small {
+  margin-top: .3rem;
+  color: #7e899d;
+  font-size: .74rem;
+  line-height: 1.45;
+}
+
+.service-card__arrow {
+  align-self: start;
+  color: #6f7b8f;
+  transition: color .25s ease, transform .25s ease;
+}
+
+.service-card:hover .service-card__arrow,
+.service-card:focus-visible .service-card__arrow {
+  color: #f0a04a;
+  transform: translate(2px,-2px);
+}
+
+.services__note {
+  margin: 1rem 0 0;
+  color: #687388;
+  font-size: .75rem;
+  min-height: 1.2em;
+}
+
+.quick-action-card--link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.quick-action-card--link:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.quick-action-card__icon svg {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  z-index: 1;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: #fff;
+}
+
+/* Footer information dialog */
+.footer-info[hidden] { display: none; }
+
+.footer-info {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+}
+
+.footer-info__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(3,7,14,.66);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  transition: opacity .22s ease;
+}
+
+.footer-info__dialog {
+  position: relative;
+  width: min(720px, 100%);
+  max-height: min(82vh, 720px);
+  overflow: auto;
+  padding: 2rem;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 1.35rem;
+  background: linear-gradient(150deg,#151d2b,#0d1421);
+  box-shadow: 0 35px 100px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.035);
+  transform: translateY(16px) scale(.985);
+  opacity: 0;
+  transition: transform .22s cubic-bezier(.22,.61,.36,1), opacity .22s ease;
+}
+
+.footer-info.is-visible .footer-info__backdrop { opacity: 1; }
+.footer-info.is-visible .footer-info__dialog { transform: translateY(0) scale(1); opacity: 1; }
+
+.footer-info__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 50%;
+  background: rgba(255,255,255,.035);
+  color: #9aa4b6;
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+
+.footer-info__close:hover { color: #fff; background: rgba(255,255,255,.07); }
+
+.footer-info__dialog h2 {
+  margin: .4rem 3rem 1.25rem 0;
+  color: #f2f5fb;
+  font-family: var(--font-family-display);
+  font-size: clamp(1.65rem, 3vw, 2.2rem);
+}
+
+.footer-info__content { color: #8e99ab; line-height: 1.7; }
+.footer-info__content p { margin: 0; }
+
+.footer-info__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .8rem;
+}
+
+.footer-info__grid article,
+.footer-info__contact > div {
+  padding: 1rem;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: .9rem;
+  background: rgba(255,255,255,.025);
+}
+
+.footer-info__grid strong { color: #edf1f7; font-size: .9rem; }
+.footer-info__grid p { margin-top: .45rem; font-size: .78rem; }
+
+.footer-info__contact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .8rem;
+}
+
+.footer-info__contact span,
+.footer-info__contact strong,
+.footer-info__contact small { display: block; }
+.footer-info__contact span { color: #718096; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; }
+.footer-info__contact strong { margin: .35rem 0; color: #f0a04a; font-size: .92rem; overflow-wrap: anywhere; }
+.footer-info__contact small { color: #8994a7; font-size: .72rem; }
+
+.footer-info__terms ul { margin: .9rem 0 0; padding-left: 1.15rem; }
+.footer-info__terms li { margin: .55rem 0; }
+.footer-info__official {
+  display: inline-flex;
+  margin-top: 1.25rem;
+  color: #f0a04a;
+  font-weight: 650;
+  text-decoration: none;
+}
+.footer-info__official:hover { text-decoration: underline; }
+
+/* Light mode: a deliberately separate treatment so the new cards/dialog
+   feel native to the existing warm light palette. */
+html[data-theme="light"] .services::before {
+  background: linear-gradient(90deg, transparent, rgba(43,53,68,.12), transparent);
+}
+
+html[data-theme="light"] .services__heading { color: #202c40; }
+html[data-theme="light"] .services__hint { color: #707b8d; }
+html[data-theme="light"] .service-card {
+  border-color: rgba(43,53,68,.11);
+  background: linear-gradient(145deg,#fffdf9,#f1ece3);
+  box-shadow: 0 18px 45px rgba(47,53,62,.09), inset 0 1px 0 rgba(255,255,255,.8);
+}
+html[data-theme="light"] .service-card:hover,
+html[data-theme="light"] .service-card:focus-visible {
+  border-color: rgba(180,92,24,.24);
+  background: linear-gradient(145deg,#fffefa,#f8f1e6);
+  box-shadow: 0 20px 48px rgba(47,53,62,.13);
+}
+html[data-theme="light"] .service-card__icon {
+  background: rgba(201,109,35,.07);
+  border-color: rgba(201,109,35,.18);
+  color: #b45c18;
+}
+html[data-theme="light"] .service-card strong { color: #29364a; }
+html[data-theme="light"] .service-card small,
+html[data-theme="light"] .services__note { color: #7b8698; }
+html[data-theme="light"] .service-card__arrow { color: #788396; }
+html[data-theme="light"] .service-card:hover .service-card__arrow,
+html[data-theme="light"] .service-card:focus-visible .service-card__arrow { color: #b45c18; }
+
+html[data-theme="light"] .footer-info__backdrop { background: rgba(28,34,43,.38); }
+html[data-theme="light"] .footer-info__dialog {
+  border-color: rgba(43,53,68,.12);
+  background: linear-gradient(150deg,#fffdf9,#f1ece3);
+  box-shadow: 0 35px 90px rgba(40,45,53,.22), inset 0 1px 0 rgba(255,255,255,.85);
+}
+html[data-theme="light"] .footer-info__dialog h2 { color: #202d42; }
+html[data-theme="light"] .footer-info__content { color: #6d7789; }
+html[data-theme="light"] .footer-info__grid article,
+html[data-theme="light"] .footer-info__contact > div {
+  border-color: rgba(43,53,68,.1);
+  background: rgba(255,255,255,.48);
+}
+html[data-theme="light"] .footer-info__grid strong { color: #26344a; }
+html[data-theme="light"] .footer-info__contact span { color: #7a8495; }
+html[data-theme="light"] .footer-info__contact strong,
+html[data-theme="light"] .footer-info__official { color: #a95518; }
+html[data-theme="light"] .footer-info__contact small { color: #727d8f; }
+html[data-theme="light"] .footer-info__close {
+  border-color: rgba(43,53,68,.12);
+  background: rgba(43,53,68,.035);
+  color: #667286;
+}
+html[data-theme="light"] .footer-info__close:hover { color: #26344a; background: rgba(43,53,68,.07); }
+
+@media (max-width: 900px) {
+  .services__grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .footer-info__grid,
+  .footer-info__contact { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .services { padding-top: 4rem; }
+  .services__intro { align-items: start; flex-direction: column; gap: .7rem; }
+  .services__grid { grid-template-columns: 1fr; }
+  .footer-info__dialog { padding: 1.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .service-card__arrow,
+  .footer-info__backdrop,
+  .footer-info__dialog { transition: none !important; }
+}

@@ -215,5 +215,213 @@ window.TRAIN_DATA = {
   ],
   "SBC-MAS":[
     {number:"12028",name:"Bangalore City - Chennai Central Shatabdi",fromCode:"SBC",fromName:"Bangalore City Jn",fromTime:"16:25",toCode:"MAS",toName:"Chennai Central",toTime:"21:00",duration:"4h 35m",days:["Daily"],classes:["CC","EC"]}
+  ],
+
+  "ADI-BCT": [
+    {number:"12268",name:"MMCT Duronto Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"01:10",toCode:"MMCT",toName:"Mumbai Central",toTime:"08:05",duration:"6h 55m",days:["Daily"],classes:["1A","2A","3A","3E","2S"]},
+    {number:"12934",name:"Karnavati Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"05:00",toCode:"MMCT",toName:"Mumbai Central",toTime:"12:20",duration:"7h 20m",days:["Daily"],classes:["CC","2S"]},
+    {number:"12932",name:"Ahmedabad-Mumbai Central Double Decker",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"05:50",toCode:"MMCT",toName:"Mumbai Central",toTime:"13:05",duration:"7h 15m",days:["Daily"],classes:["CC","EC"]},
+    {number:"22962",name:"Vande Bharat Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"06:10",toCode:"MMCT",toName:"Mumbai Central",toTime:"11:35",duration:"5h 25m",days:["Daily"],classes:["CC","EC"]},
+    {number:"82902",name:"IRCTC Tejas Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"06:40",toCode:"MMCT",toName:"Mumbai Central",toTime:"13:05",duration:"6h 25m",days:["Daily"],classes:["CC","EC"]}
+  ],
+
+  "BCT-ADI": [
+    {number:"20901",name:"Vande Bharat Express",fromCode:"MMCT",fromName:"Mumbai Central",fromTime:"06:00",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"11:35",duration:"5h 35m",days:["Daily"],classes:["CC","EC"]},
+    {number:"12009",name:"ADI Shatabdi Express",fromCode:"MMCT",fromName:"Mumbai Central",fromTime:"06:20",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"12:40",duration:"6h 20m",days:["Daily"],classes:["CC","EC"]},
+    {number:"22953",name:"Gujarat SF Express",fromCode:"MMCT",fromName:"Mumbai Central",fromTime:"05:40",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"14:30",duration:"8h 50m",days:["Daily"],classes:["CC","2S"]},
+    {number:"22903",name:"Bhurj AC SF Express",fromCode:"BVI",fromName:"Borivali",fromTime:"00:15",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"06:30",duration:"6h 15m",days:["Daily"],classes:["1A","2A","3A","3E"]}
+  ],
+
+  "ADI-MAS": [
+    {number:"22920",name:"ADI MAS Humsafar",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"09:40",toCode:"MAS",toName:"MGR Chennai Central",toTime:"15:05",duration:"29h 25m",days:["Daily"],classes:["3A","SL","2S"]},
+    {number:"20954",name:"ADI MAS SF Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"09:40",toCode:"MAS",toName:"MGR Chennai Central",toTime:"15:25",duration:"29h 45m",days:["Daily"],classes:["2A","3A","SL","3E"]},
+    {number:"20626",name:"Bhagat Ki Kothi-MAS SF Express",fromCode:"SBIB",fromName:"Sabarmati Bg",fromTime:"13:35",toCode:"MAS",toName:"MGR Chennai Central",toTime:"23:15",duration:"33h 40m",days:["Weekly"],classes:["2A","3A","SL","3E"]},
+    {number:"12655",name:"Navjeevan Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"21:25",toCode:"MAS",toName:"MGR Chennai Central",toTime:"05:10",duration:"31h 45m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"22664",name:"Jodhpur-Chennai Egmore SF Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"08:00",toCode:"TBM",toName:"Tambaram",toTime:"17:10",duration:"33h 10m",days:["Weekly"],classes:["2A","3A","SL"]}
+  ],
+
+  "MAS-ADI": [
+    {number:"12656",name:"Navjeevan SF Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"10:10",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"18:00",duration:"31h 50m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"22919",name:"ADI Humsafar",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"16:00",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"21:15",duration:"29h 15m",days:["Weekly"],classes:["3A","SL","2S"]},
+    {number:"20953",name:"MAS ADI SF Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"22:40",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"03:20",duration:"28h 40m",days:["Weekly"],classes:["2A","3A","SL","3E"]},
+    {number:"20625",name:"MAS-BGKT SF Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"19:35",toCode:"SBIB",toName:"Sabarmati Bg",toTime:"02:05",duration:"30h 30m",days:["Weekly"],classes:["2A","3A","SL","3E"]}
+  ],
+
+  "ADI-NDLS": [
+    {number:"12957",name:"Swarna Jayanti Rajdhani Express",fromCode:"SBIB",fromName:"Sabarmati Bg",fromTime:"19:20",toCode:"NDLS",toName:"New Delhi",toTime:"07:30",duration:"12h 10m",days:["Daily"],classes:["1A","2A","3A"]},
+    {number:"12917",name:"Gujarat Sampark Kranti Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"15:30",toCode:"NZM",toName:"Hazrat Nizamuddin",toTime:"05:50",duration:"14h 20m",days:["Weekly"],classes:["1A","2A","3A","SL","3E"]},
+    {number:"12915",name:"Ashram Express",fromCode:"SBIB",fromName:"Sabarmati Bg",fromTime:"19:45",toCode:"DLI",toName:"Delhi",toTime:"10:00",duration:"14h 15m",days:["Daily"],classes:["1A","2A","3A","SL","3E"]},
+    {number:"19031",name:"Yoga Express",fromCode:"GNC",fromName:"Gandhinagar Capital",fromTime:"11:55",toCode:"DSA",toName:"Shahdara",toTime:"05:19",duration:"17h 24m",days:["Daily"],classes:["1A","2A","3A","SL","3E"]},
+    {number:"12475",name:"Sarvodaya SF Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"14:25",toCode:"NDLS",toName:"New Delhi",toTime:"05:25",duration:"15h 00m",days:["Weekly"],classes:["1A","2A","3A","SL","3E"]}
+  ],
+
+  "NDLS-ADI": [
+    {number:"12958",name:"Swarna Jayanti Rajdhani Express",fromCode:"NDLS",fromName:"New Delhi",fromTime:"19:55",toCode:"SBIB",toName:"Sabarmati Bg",toTime:"08:05",duration:"12h 10m",days:["Daily"],classes:["1A","2A","3A"]},
+    {number:"12916",name:"Ashram Express",fromCode:"DLI",fromName:"Delhi",fromTime:"14:55",toCode:"SBIB",toName:"Sabarmati Bg",toTime:"05:45",duration:"14h 50m",days:["Daily"],classes:["1A","2A","3A","SL","3E"]},
+    {number:"12474",name:"Sarvodaya SF Express",fromCode:"NDLS",fromName:"New Delhi",fromTime:"21:40",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"12:05",duration:"14h 25m",days:["Weekly"],classes:["1A","2A","3A","SL","3E"]},
+    {number:"20940",name:"SLN SBIB SF Express",fromCode:"DLI",fromName:"Delhi",fromTime:"06:20",toCode:"SBIB",toName:"Sabarmati Bg",toTime:"21:20",duration:"15h 00m",days:["Weekly"],classes:["2A","3A","SL"]}
+  ],
+
+  "NDLS-LKO": [
+    {number:"12004",name:"New Delhi-Lucknow Shatabdi Express",fromCode:"NDLS",fromName:"New Delhi",fromTime:"06:10",toCode:"LJN",toName:"Lucknow Ne",toTime:"13:00",duration:"6h 50m",days:["Daily"],classes:["CC","EC"]},
+    {number:"22426",name:"Anand Vihar-Lucknow Vande Bharat Express",fromCode:"ANVT",fromName:"Anand Vihar Terminal",fromTime:"06:10",toCode:"LKO",toName:"Lucknow",toTime:"12:35",duration:"6h 25m",days:["Daily"],classes:["CC","EC"]},
+    {number:"12430",name:"New Delhi-Lucknow AC SF Express",fromCode:"NDLS",fromName:"New Delhi",fromTime:"23:25",toCode:"LKO",toName:"Lucknow",toTime:"07:25",duration:"8h 00m",days:["Daily"],classes:["1A","2A","3A","3E"]},
+    {number:"12230",name:"Lucknow Mail",fromCode:"NDLS",fromName:"New Delhi",fromTime:"22:00",toCode:"LKO",toName:"Lucknow",toTime:"06:40",duration:"8h 40m",days:["Daily"],classes:["1A","2A","3A","SL","3E"]},
+    {number:"12876",name:"Neelanchal Express",fromCode:"ANVT",fromName:"Anand Vihar Terminal",fromTime:"07:30",toCode:"LKO",toName:"Lucknow",toTime:"15:00",duration:"7h 30m",days:["Weekly"],classes:["1A","2A","3A","SL","3E"]}
+  ],
+
+  "LKO-NDLS": [
+    {number:"12003",name:"Lucknow-New Delhi Shatabdi Express",fromCode:"LJN",fromName:"Lucknow Ne",fromTime:"15:55",toCode:"NDLS",toName:"New Delhi",toTime:"22:45",duration:"6h 50m",days:["Daily"],classes:["CC","EC"]},
+    {number:"22425",name:"Lucknow-Anand Vihar Vande Bharat Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"14:35",toCode:"ANVT",toName:"Anand Vihar Terminal",toTime:"20:50",duration:"6h 15m",days:["Daily"],classes:["CC","EC"]},
+    {number:"12429",name:"Lucknow-New Delhi AC SF Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"23:30",toCode:"NDLS",toName:"New Delhi",toTime:"07:30",duration:"8h 00m",days:["Daily"],classes:["1A","2A","3A","3E"]},
+    {number:"12229",name:"Lucknow Mail",fromCode:"LKO",fromName:"Lucknow",fromTime:"22:00",toCode:"NDLS",toName:"New Delhi",toTime:"06:45",duration:"8h 45m",days:["Daily"],classes:["1A","2A","3A","SL","3E"]}
+  ],
+
+  "NDLS-NGP": [
+    {number:"12434",name:"Chennai Rajdhani Express",fromCode:"NZM",fromName:"Hazrat Nizamuddin",fromTime:"15:35",toCode:"NGP",toName:"Nagpur",toTime:"05:05",duration:"13h 30m",days:["Weekly"],classes:["1A","2A","3A"]},
+    {number:"12270",name:"MGR Chennai Central Duronto Express",fromCode:"NZM",fromName:"Hazrat Nizamuddin",fromTime:"15:55",toCode:"NGP",toName:"Nagpur",toTime:"05:35",duration:"13h 40m",days:["Weekly"],classes:["1A","2A","3A","SL","2S"]},
+    {number:"12724",name:"Telangana Express",fromCode:"NDLS",fromName:"New Delhi",fromTime:"16:00",toCode:"NGP",toName:"Nagpur",toTime:"07:10",duration:"15h 10m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"20806",name:"AP Express",fromCode:"NDLS",fromName:"New Delhi",fromTime:"20:00",toCode:"NGP",toName:"Nagpur",toTime:"10:25",duration:"14h 25m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"12622",name:"Tamil Nadu SF Express",fromCode:"NDLS",fromName:"New Delhi",fromTime:"21:05",toCode:"NGP",toName:"Nagpur",toTime:"13:05",duration:"16h 00m",days:["Daily"],classes:["1A","2A","3A","SL"]}
+  ],
+
+  "NGP-NDLS": [
+    {number:"12433",name:"Chennai Rajdhani Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"20:30",toCode:"NZM",toName:"Hazrat Nizamuddin",toTime:"10:30",duration:"14h 00m",days:["Weekly"],classes:["1A","2A","3A"]},
+    {number:"12611",name:"NZM Garib Rath",fromCode:"NGP",fromName:"Nagpur",fromTime:"20:30",toCode:"NZM",toName:"Hazrat Nizamuddin",toTime:"10:30",duration:"14h 00m",days:["Weekly"],classes:["3A"]},
+    {number:"12723",name:"Telangana SF Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"15:25",toCode:"NDLS",toName:"New Delhi",toTime:"08:00",duration:"16h 35m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"12649",name:"Karnataka Sampark Kranti Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"17:10",toCode:"NZM",toName:"Hazrat Nizamuddin",toTime:"08:10",duration:"15h 00m",days:["Weekly"],classes:["1A","2A","3A","SL","3E"]},
+    {number:"12441",name:"BSP-NDLS Rajdhani Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"20:35",toCode:"NDLS",toName:"New Delhi",toTime:"10:40",duration:"14h 05m",days:["Weekly"],classes:["1A","2A","3A"]}
+  ],
+
+  "BCT-NGP": [
+    {number:"12859",name:"Gitanjali Express",fromCode:"CSMT",fromName:"Mumbai CSMT",fromTime:"06:00",toCode:"NGP",toName:"Nagpur",toTime:"18:55",duration:"12h 55m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"12139",name:"Sewagram SF Express",fromCode:"CSMT",fromName:"Mumbai CSMT",fromTime:"14:55",toCode:"NGP",toName:"Nagpur",toTime:"05:45",duration:"14h 50m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"12105",name:"Vidarbha SF Express",fromCode:"CSMT",fromName:"Mumbai CSMT",fromTime:"19:05",toCode:"NGP",toName:"Nagpur",toTime:"08:55",duration:"13h 50m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"12289",name:"Mumbai CSMT-Nagpur Duronto Express",fromCode:"CSMT",fromName:"Mumbai CSMT",fromTime:"20:15",toCode:"NGP",toName:"Nagpur",toTime:"07:20",duration:"11h 05m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"12809",name:"Howrah Mail",fromCode:"CSMT",fromName:"Mumbai CSMT",fromTime:"21:10",toCode:"NGP",toName:"Nagpur",toTime:"11:20",duration:"14h 10m",days:["Daily"],classes:["1A","2A","3A","SL"]}
+  ],
+
+  "NGP-BCT": [
+    {number:"12860",name:"Gitanjali Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"08:05",toCode:"CSMT",toName:"Mumbai CSMT",toTime:"20:30",duration:"12h 25m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"12106",name:"Vidarbha SF Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"18:10",toCode:"CSMT",toName:"Mumbai CSMT",toTime:"07:20",duration:"13h 10m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"12140",name:"Sewagram SF Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"21:15",toCode:"CSMT",toName:"Mumbai CSMT",toTime:"12:05",duration:"14h 50m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"12290",name:"Nagpur-Mumbai CSMT Duronto Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"21:20",toCode:"CSMT",toName:"Mumbai CSMT",toTime:"08:30",duration:"11h 10m",days:["Daily"],classes:["1A","2A","3A","SL"]}
+  ],
+
+  "BCT-MAS": [
+    {number:"22159",name:"Chennai Express",fromCode:"CSMT",fromName:"Mumbai CSMT",fromTime:"12:45",toCode:"MAS",toName:"MGR Chennai Central",toTime:"10:30",duration:"21h 45m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"11041",name:"Mumbai-Chennai Express",fromCode:"CSMT",fromName:"Mumbai CSMT",fromTime:"14:00",toCode:"MAS",toName:"MGR Chennai Central",toTime:"11:30",duration:"21h 30m",days:["Daily"],classes:["2A","3A","SL"]},
+    {number:"12163",name:"Chennai Superfast Express",fromCode:"LTT",fromName:"Lokmanya Tilak",fromTime:"20:50",toCode:"MAS",toName:"MGR Chennai Central",toTime:"18:45",duration:"21h 55m",days:["Daily"],classes:["1A","2A","3A","SL"]}
+  ],
+
+  "MAS-BCT": [
+    {number:"22160",name:"Chennai-Mumbai Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"13:30",toCode:"CSMT",toName:"Mumbai CSMT",toTime:"10:50",duration:"21h 20m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"11042",name:"Chennai-Mumbai Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"23:55",toCode:"CSMT",toName:"Mumbai CSMT",toTime:"20:30",duration:"20h 35m",days:["Daily"],classes:["2A","3A","SL"]}
+  ],
+
+  "BCT-JP": [
+    {number:"12955",name:"Mumbai Central-Jaipur Gangaur SF Express",fromCode:"MMCT",fromName:"Mumbai Central",fromTime:"19:05",toCode:"JP",toName:"Jaipur",toTime:"12:00",duration:"16h 55m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"12239",name:"Mumbai Central-Hisar AC Duronto Express",fromCode:"MMCT",fromName:"Mumbai Central",fromTime:"23:10",toCode:"JP",toName:"Jaipur",toTime:"13:40",duration:"14h 30m",days:["Daily"],classes:["1A","2A","3A","3E","2S"]},
+    {number:"12979",name:"Bandra Terminus-Jaipur SF Express",fromCode:"BDTS",fromName:"Bandra Terminus",fromTime:"17:05",toCode:"JP",toName:"Jaipur",toTime:"10:05",duration:"17h 00m",days:["Daily"],classes:["1A","2A","3A","SL","3E"]},
+    {number:"14702",name:"Aravali Express",fromCode:"BDTS",fromName:"Bandra Terminus",fromTime:"21:00",toCode:"JP",toName:"Jaipur",toTime:"17:45",duration:"20h 45m",days:["Daily"],classes:["2A","3A","SL","3E"]}
+  ],
+
+  "GHY-BCT": [
+    {number:"15648",name:"Guwahati-LTT Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"15:00",toCode:"LTT",toName:"Lokmanya Tilak",toTime:"17:50",duration:"50h 50m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"15946",name:"Dibrugarh-LTT Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"16:45",toCode:"LTT",toName:"Lokmanya Tilak",toTime:"17:50",duration:"49h 05m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"22512",name:"Karmabhoomi Express",fromCode:"KYQ",fromName:"Kamakhya",fromTime:"18:00",toCode:"LTT",toName:"Lokmanya Tilak",toTime:"21:30",duration:"51h 30m",days:["Weekly"],classes:["1A","2A","3A","SL"]},
+    {number:"15660",name:"Agartala-LTT AC Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"20:50",toCode:"LTT",toName:"Lokmanya Tilak",toTime:"16:15",duration:"43h 25m",days:["Weekly"],classes:["1A","2A","3A"]}
+  ],
+
+  "BCT-GHY": [
+    {number:"15647",name:"LTT-Guwahati Express",fromCode:"LTT",fromName:"Lokmanya Tilak",fromTime:"08:05",toCode:"GHY",toName:"Guwahati",toTime:"12:45",duration:"52h 40m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"12519",name:"LTT-Agartala AC Express",fromCode:"LTT",fromName:"Lokmanya Tilak",fromTime:"07:50",toCode:"GHY",toName:"Guwahati",toTime:"03:20",duration:"43h 30m",days:["Weekly"],classes:["1A","2A","3A"]},
+    {number:"15945",name:"LTT-Dibrugarh Express",fromCode:"LTT",fromName:"Lokmanya Tilak",fromTime:"08:05",toCode:"GHY",toName:"Guwahati",toTime:"07:55",duration:"47h 50m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"22511",name:"Karmabhoomi Express",fromCode:"LTT",fromName:"Lokmanya Tilak",fromTime:"13:15",toCode:"GHY",toName:"Guwahati",toTime:"15:35",duration:"50h 20m",days:["Weekly"],classes:["1A","2A","3A","SL"]}
+  ],
+
+  "GHY-JP": [
+    {number:"15632",name:"Guwahati-Barmer Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"04:30",toCode:"JP",toName:"Jaipur",toTime:"19:30",duration:"39h 00m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"15634",name:"Guwahati-Bikaner Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"04:30",toCode:"JP",toName:"Jaipur",toTime:"19:40",duration:"39h 10m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"19616",name:"Kavi Guru Express",fromCode:"KYQ",fromName:"Kamakhya",fromTime:"21:20",toCode:"JP",toName:"Jaipur",toTime:"20:40",duration:"47h 20m",days:["Weekly"],classes:["2A","3A","SL","3E"]}
+  ],
+
+  "JP-GHY": [
+    {number:"15631",name:"Barmer-Guwahati Express",fromCode:"JP",fromName:"Jaipur",fromTime:"09:10",toCode:"GHY",toName:"Guwahati",toTime:"23:35",duration:"38h 25m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"15633",name:"Bikaner-Guwahati Express",fromCode:"JP",fromName:"Jaipur",fromTime:"09:10",toCode:"GHY",toName:"Guwahati",toTime:"23:45",duration:"38h 35m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"19615",name:"Kavi Guru Express",fromCode:"JP",fromName:"Jaipur",fromTime:"23:10",toCode:"KYQ",toName:"Kamakhya",toTime:"00:20",duration:"49h 10m",days:["Weekly"],classes:["2A","3A","SL","3E"]}
+  ],
+
+  "GHY-LKO": [
+    {number:"19305",name:"DADN-KYQ Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"05:35",toCode:"KYQ",toName:"Kamakhya",toTime:"12:30",duration:"30h 55m",days:["Weekly"],classes:["2A","3A","SL","3E"]},
+    {number:"15934",name:"Amritsar-Naharlagun Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"06:40",toCode:"GHY",toName:"Guwahati",toTime:"15:25",duration:"32h 45m",days:["Weekly"],classes:["1A","2A","3A","SL"]},
+    {number:"15904",name:"CDG-DBRG Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"11:10",toCode:"GHY",toName:"Guwahati",toTime:"16:50",duration:"29h 40m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"15910",name:"Avadh Assam Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"17:40",toCode:"GHY",toName:"Guwahati",toTime:"00:55",duration:"31h 15m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"20504",name:"Dibrugarh Rajdhani Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"18:50",toCode:"GHY",toName:"Guwahati",toTime:"18:15",duration:"23h 25m",days:["Weekly"],classes:["1A","2A","3A"]}
+  ],
+
+  "LKO-GHY": [
+    {number:"15934",name:"Amritsar-Naharlagun Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"06:40",toCode:"GHY",toName:"Guwahati",toTime:"15:25",duration:"32h 45m",days:["Weekly"],classes:["1A","2A","3A","SL"]},
+    {number:"15904",name:"CDG-DBRG Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"11:10",toCode:"GHY",toName:"Guwahati",toTime:"16:50",duration:"29h 40m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"15910",name:"Avadh Assam Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"17:40",toCode:"GHY",toName:"Guwahati",toTime:"00:55",duration:"31h 15m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"20504",name:"Dibrugarh Rajdhani Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"18:50",toCode:"GHY",toName:"Guwahati",toTime:"18:15",duration:"23h 25m",days:["Weekly"],classes:["1A","2A","3A"]},
+    {number:"15635",name:"Guwahati Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"21:00",toCode:"GHY",toName:"Guwahati",toTime:"06:10",duration:"33h 10m",days:["Weekly"],classes:["2A","3A","SL"]}
+  ],
+
+  "GHY-ADI": [
+    {number:"15636",name:"Dwarka Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"10:45",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"03:55",duration:"41h 10m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"15635",name:"Guwahati Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"16:55",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"11:40",duration:"42h 45m",days:["Weekly"],classes:["2A","3A","SL"]}
+  ],
+
+  "GHY-NGP": [
+    {number:"22511",name:"Karmabhoomi Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"01:25",toCode:"NGP",toName:"Nagpur",toTime:"15:35",duration:"38h 10m",days:["Weekly"],classes:["1A","2A","3A","SL"]}
+  ],
+
+  "NGP-GHY": [
+    {number:"22511",name:"Karmabhoomi Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"01:25",toCode:"KYQ",toName:"Kamakhya",toTime:"15:35",duration:"38h 10m",days:["Weekly"],classes:["1A","2A","3A","SL"]}
+  ],
+
+  "MAS-GHY": [
+    {number:"12510",name:"Guwahati-SMVB Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"06:15",toCode:"GHY",toName:"Guwahati",toTime:"03:10",duration:"44h 55m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"12552",name:"KYQ-SMVB AC Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"14:00",toCode:"GHY",toName:"Guwahati",toTime:"10:30",duration:"44h 30m",days:["Weekly"],classes:["1A","2A","3A"]},
+    {number:"15630",name:"Nagaon Express",fromCode:"MS",fromName:"Chennai Egmore",fromTime:"14:55",toCode:"GHY",toName:"Guwahati",toTime:"20:40",duration:"53h 45m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"12508",name:"SCL-TVC Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"06:10",toCode:"MAS",toName:"MGR Chennai Central",toTime:"03:10",duration:"45h 00m",days:["Weekly"],classes:["2A","3A","SL"]}
+  ],
+
+  "GHY-MAS": [
+    {number:"12510",name:"Guwahati-SMVB Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"06:15",toCode:"PER",toName:"Perambur",toTime:"03:10",duration:"44h 55m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"12552",name:"KYQ-SMVB AC Express",fromCode:"KYQ",fromName:"Kamakhya",fromTime:"14:00",toCode:"PER",toName:"Perambur",toTime:"10:30",duration:"44h 30m",days:["Weekly"],classes:["1A","2A","3A"]},
+    {number:"12516",name:"SCL-CBE Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"06:10",toCode:"PER",toName:"Perambur",toTime:"03:10",duration:"45h 00m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"22502",name:"NTSK-SMVB Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"05:15",toCode:"PER",toName:"Perambur",toTime:"03:10",duration:"45h 55m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"15630",name:"Nagaon Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"14:55",toCode:"MS",toName:"Chennai Egmore",toTime:"20:40",duration:"53h 45m",days:["Weekly"],classes:["2A","3A","SL"]}
+  ],
+
+  "MAS-NGP": [
+    {number:"12611",name:"NZM Garib Rath",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"06:00",toCode:"NGP",toName:"Nagpur",toTime:"20:25",duration:"14h 25m",days:["Weekly"],classes:["3A"]},
+    {number:"12433",name:"Chennai Rajdhani Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"06:05",toCode:"NGP",toName:"Nagpur",toTime:"20:25",duration:"14h 20m",days:["Weekly"],classes:["1A","2A","3A"]},
+    {number:"12269",name:"MAS NZM Duronto Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"06:35",toCode:"NGP",toName:"Nagpur",toTime:"20:40",duration:"14h 05m",days:["Weekly"],classes:["1A","2A","3A","SL","2S"]},
+    {number:"16031",name:"Andaman Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"05:10",toCode:"NGP",toName:"Nagpur",toTime:"01:40",duration:"20h 30m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"16093",name:"MGR Chennai Central-Lucknow Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"05:15",toCode:"NGP",toName:"Nagpur",toTime:"02:10",duration:"20h 55m",days:["Weekly"],classes:["2A","3A","SL"]}
+  ],
+
+  "NGP-MAS": [
+    {number:"12270",name:"MAS Duronto Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"05:40",toCode:"MAS",toName:"MGR Chennai Central",toTime:"20:50",duration:"15h 10m",days:["Weekly"],classes:["1A","2A","3A","SL","2S"]},
+    {number:"12434",name:"Chennai Rajdhani Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"05:10",toCode:"MAS",toName:"MGR Chennai Central",toTime:"20:50",duration:"15h 40m",days:["Weekly"],classes:["1A","2A","3A"]},
+    {number:"12612",name:"MAS Garib Rath",fromCode:"NGP",fromName:"Nagpur",fromTime:"05:10",toCode:"MAS",toName:"MGR Chennai Central",toTime:"21:00",duration:"15h 50m",days:["Weekly"],classes:["3A"]},
+    {number:"12622",name:"Tamil Nadu SF Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"13:10",toCode:"MAS",toName:"MGR Chennai Central",toTime:"06:35",duration:"17h 25m",days:["Daily"],classes:["1A","2A","3A","SL"]},
+    {number:"22645",name:"Ahilya Nagari SF Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"04:20",toCode:"MAS",toName:"MGR Chennai Central",toTime:"22:40",duration:"18h 20m",days:["Weekly"],classes:["2A","3A","3E","SL"]}
+  ],
+
+  "MAS-NDLS": [
+    {number:"12433",name:"Chennai Rajdhani Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"06:05",toCode:"NDLS",toName:"New Delhi",toTime:"10:30",duration:"28h 25m",days:["Weekly"],classes:["1A","2A","3A"]},
+    {number:"12611",name:"NZM Garib Rath",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"06:00",toCode:"NZM",toName:"Hazrat Nizamuddin",toTime:"10:30",duration:"28h 30m",days:["Weekly"],classes:["3A"]},
+    {number:"12269",name:"MAS NZM Duronto Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"06:35",toCode:"NZM",toName:"Hazrat Nizamuddin",toTime:"10:40",duration:"28h 05m",days:["Weekly"],classes:["1A","2A","3A","SL","2S"]},
+    {number:"12622",name:"Tamil Nadu SF Express",fromCode:"MAS",fromName:"MGR Chennai Central",fromTime:"22:00",toCode:"NDLS",toName:"New Delhi",toTime:"07:10",duration:"33h 10m",days:["Daily"],classes:["1A","2A","3A","SL"]}
+  ],
+
+
+  "ADI-GHY": [
+    {number:"15635",name:"Guwahati Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"21:40",toCode:"GHY",toName:"Guwahati",toTime:"06:10",duration:"56h 30m",days:["Weekly"],classes:["2A","3A","SL"]},
+    {number:"15667",name:"Kamakhya Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"21:40",toCode:"KYQ",toName:"Kamakhya",toTime:"05:20",duration:"55h 40m",days:["Weekly"],classes:["1A","2A","3A","SL"]}
   ]
 };

@@ -186,3 +186,156 @@ function initializeThemeToggle() {
 }
 
 document.addEventListener("DOMContentLoaded", initializeThemeToggle);
+
+/* --------------------------------------------------------------------------
+   Scroll reveal
+   Lightweight viewport-based reveals for the page sections. The animation
+   starts as soon as content enters view, with no artificial waiting period.
+   -------------------------------------------------------------------------- */
+function initializeScrollReveal() {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion || !("IntersectionObserver" in window)) return;
+
+  const style = document.createElement("style");
+  style.id = "scroll-reveal-styles";
+  style.textContent = `
+    .scroll-reveal {
+      opacity: 0;
+      transform: translate3d(0, 24px, 0);
+      transition:
+        opacity 520ms cubic-bezier(.22,.61,.36,1),
+        transform 520ms cubic-bezier(.22,.61,.36,1);
+      will-change: opacity, transform;
+    }
+
+    .scroll-reveal.is-revealed {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      will-change: auto;
+    }
+
+    .scroll-reveal-item {
+      opacity: 0;
+      transform: translate3d(0, 18px, 0);
+      transition:
+        opacity 460ms cubic-bezier(.22,.61,.36,1),
+        transform 460ms cubic-bezier(.22,.61,.36,1);
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform;
+    }
+
+    .scroll-reveal.is-revealed .scroll-reveal-item {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      will-change: auto;
+    }
+  `;
+  document.head.appendChild(style);
+
+  const sections = document.querySelectorAll(
+    "main > section:not(.hero), .site-footer"
+  );
+
+  const observer = new IntersectionObserver((entries, revealObserver) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+
+      entry.target.querySelectorAll(
+        ".quick-action-card, .train-card, .service-card, .railway-moment-card"
+      ).forEach((item, index) => {
+        item.classList.add("scroll-reveal-item");
+        item.style.setProperty(
+          "--reveal-delay",
+          `${Math.min(index * 45, 180)}ms`
+        );
+      });
+
+      requestAnimationFrame(() => {
+        entry.target.classList.add("is-revealed");
+      });
+
+      revealObserver.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: "0px 0px -7% 0px"
+  });
+
+  sections.forEach((section) => {
+    section.classList.add("scroll-reveal");
+    observer.observe(section);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", initializeScrollReveal);
+
+
+/* --------------------------------------------------------------------------
+   Booking-widget shortcuts
+   The PNR Status and Live Status tabs in the booking card are entry points
+   into the corresponding Quick Actions tools.  They intentionally open the
+   existing Quick Action panel instead of maintaining a second status UI.
+   -------------------------------------------------------------------------- */
+function initializeBookingStatusShortcuts() {
+  const quickActionSelector = {
+    pnr: '[data-quick-action="pnr"]',
+    train: '[data-quick-action="status"]',
+    bookings: '[data-quick-action="bookings"]'
+  };
+
+  function openQuickAction(type) {
+    const target = document.querySelector(quickActionSelector[type]);
+    if (!target) return;
+
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+    // Let the scroll settle before invoking the existing Quick Actions
+    // handler. This preserves its current panel/animation behaviour.
+    window.setTimeout(function () {
+      target.click();
+    }, 220);
+  }
+
+  const pnrTab = document.getElementById("tab-pnr-status");
+  const liveTab = document.getElementById("tab-live-status");
+
+  if (pnrTab) {
+    pnrTab.addEventListener("click", function () {
+      openQuickAction("pnr");
+    });
+  }
+
+  if (liveTab) {
+    liveTab.addEventListener("click", function () {
+      openQuickAction("train");
+    });
+  }
+
+  // Navbar links should open the same Quick Actions rather than merely
+  // jumping to the card's anchor.
+  document.querySelectorAll('.navbar__link[href="#pnr-status"]').forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      openQuickAction("pnr");
+    });
+  });
+
+  document.querySelectorAll('.navbar__link[href="#train-status"]').forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      openQuickAction("train");
+    });
+  });
+
+  document.querySelectorAll('.navbar__link[href="#my-bookings"]').forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      openQuickAction("bookings");
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", initializeBookingStatusShortcuts);

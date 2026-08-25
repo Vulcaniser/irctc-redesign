@@ -18,20 +18,20 @@
     pnr: {
       kicker: "Booking utility",
       title: "Check PNR Status",
-      copy: "Enter your 10-digit PNR to continue. This demo keeps the interaction local and does not send your details anywhere.",
-      form: '<label for="quick-pnr">PNR number</label><div class="quick-action-panel__row"><input id="quick-pnr" inputmode="numeric" maxlength="10" placeholder="10-digit PNR"><button type="button" class="btn btn--primary" data-demo-submit="pnr">Check</button></div><small>Demo interaction — live railway services are not connected.</small>'
+      copy: "Enter your demo PNR or booking reference to continue. This demo keeps the interaction local and does not send your details anywhere.",
+      form: '<label for="quick-pnr">PNR number</label><div class="quick-action-panel__row"><input id="quick-pnr" inputmode="numeric" maxlength="24" placeholder="Demo PNR or booking ID"><button type="button" class="btn btn--primary" data-demo-submit="pnr">Check</button></div><small>Demo interaction — live railway services are not connected.</small>'
     },
     status: {
       kicker: "Journey utility",
       title: "Track a Train",
-      copy: "Enter a train number or name to open a lightweight status panel. Live running data can be connected here later without changing the booking flow.",
-      form: '<label for="quick-train">Train number or name</label><div class="quick-action-panel__row"><input id="quick-train" placeholder="e.g. 12951 or Rajdhani"><button type="button" class="btn btn--primary" data-demo-submit="status">Track</button></div><small>Demo interaction — live running data is not connected.</small>'
+      copy: "Enter a train number, train name, booking ID or PNR. A completed demo booking can show its saved journey tracking state.",
+      form: '<label for="quick-train">Train number, name, booking ID or PNR</label><div class="quick-action-panel__row"><input id="quick-train" placeholder="e.g. 12951, BK-..., or DEMO..."><button type="button" class="btn btn--primary" data-demo-submit="status">Track</button></div><small>Demo tracker — live railway running data is not connected.</small>'
     },
     bookings: {
       kicker: "Your journeys",
       title: "My Bookings",
-      copy: "Your saved journeys will appear here once booking persistence is connected. For now, this panel confirms that the quick action is ready for that workflow.",
-      form: '<div class="quick-action-panel__empty"><span aria-hidden="true">▣</span><strong>No saved bookings yet</strong><span>Search for a train to start a journey.</span><button type="button" class="btn btn--primary" data-jump-booking>Search trains</button></div>'
+      copy: "Completed mock bookings are saved locally on this browser so you can revisit their journey details.",
+      form: '<div class="quick-action-panel__empty"><span aria-hidden="true">▣</span><strong>Loading your saved journeys...</strong></div>'
     },
     help: {
       kicker: "Support desk",
@@ -49,12 +49,50 @@
     title.textContent = item.title;
     copy.textContent = item.copy;
     formHost.innerHTML = item.form;
+    if (key === 'bookings') renderMyBookings();
     panel.hidden = false;
     document.body.classList.add("quick-action-open");
     requestAnimationFrame(function () { panel.classList.add("is-visible"); });
     var firstInput = formHost.querySelector("input");
     if (firstInput) firstInput.focus();
     else q(".quick-action-panel__close").focus();
+  }
+
+
+  function money(value) {
+    return '₹'+Number(value||0).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  function renderMyBookings(){
+    var records=window.BookingUtils&&window.BookingUtils.listBookings?window.BookingUtils.listBookings():[];
+    if(!records.length){
+      formHost.innerHTML='<div class="quick-action-panel__empty"><span aria-hidden="true">▣</span><strong>No saved bookings yet</strong><span>Complete a mock booking and it will appear here.</span><button type="button" class="btn btn--primary" data-jump-booking>Search trains</button></div>';
+      return;
+    }
+    formHost.innerHTML='<div class="quick-bookings-list">'+records.map(function(r){
+      var t=r.train||{};
+      return '<article class="quick-booking-item"><div><strong>'+window.BookingUtils.esc(t.name||'Train')+'</strong><span>'+window.BookingUtils.esc(t.number||'')+' · '+window.BookingUtils.esc(t.source||'')+' → '+window.BookingUtils.esc(t.destination||'')+'</span><small>PNR '+window.BookingUtils.esc(r.pnr)+' · Booking '+window.BookingUtils.esc(r.bookingId||'')+' · '+window.BookingUtils.esc(t.date||'')+'</small></div><div class="quick-booking-item__meta"><b>'+window.BookingUtils.esc(r.status||'SUCCESS')+'</b><strong>'+money(r.total)+'</strong></div></article>';
+    }).join('')+'</div>';
+  }
+  function findTrackRecord(value){
+    var U=window.BookingUtils;
+    if(!U)return null;
+    var exact=U.findBookingRef?U.findBookingRef(value):null;
+    if(exact)return exact;
+    var needle=String(value||'').trim().toUpperCase();
+    return (U.listBookings?U.listBookings():[]).find(function(r){
+      var t=r.train||{};
+      return [t.number,t.name].some(function(v){return String(v||'').toUpperCase().indexOf(needle)>=0;});
+    })||null;
+  }
+  function renderTrackResult(record, inputValue){
+    var small=formHost.querySelector('small');
+    if(!small)return;
+    if(!record){
+      small.textContent='No saved demo booking matches '+inputValue+'. Enter a train number/name, booking ID or PNR from a completed mock booking.';
+      return;
+    }
+    var t=record.train||{};
+    small.innerHTML='<strong>Demo journey found.</strong> '+window.BookingUtils.esc(t.name||'Train')+' · '+window.BookingUtils.esc(t.number||'')+'<br>'+window.BookingUtils.esc(t.source||'')+' → '+window.BookingUtils.esc(t.destination||'')+' · '+window.BookingUtils.dateLabel(t.date)+'<br><b>Journey status:</b> Scheduled · <b>Booking:</b> '+window.BookingUtils.esc(record.bookingId||record.pnr)+' · <b>PNR:</b> '+window.BookingUtils.esc(record.pnr)+'<br><b>Payment:</b> '+window.BookingUtils.esc(record.status||'SUCCESS')+' · <b>Fare:</b> '+money(record.total);
   }
 
   function closePanel() {
@@ -82,11 +120,17 @@
         return;
       }
       input.classList.remove("is-invalid");
-      var message = submit.getAttribute("data-demo-submit") === "pnr"
-        ? "PNR accepted for the demo. Live status can be connected here later."
-        : "Train reference accepted for the demo. Live running data can be connected here later.";
-      var small = formHost.querySelector("small");
-      if (small) small.textContent = message;
+      if (submit.getAttribute("data-demo-submit") === "pnr") {
+        var record = window.BookingUtils && window.BookingUtils.findBookingRef ? window.BookingUtils.findBookingRef(input.value) : null;
+        var small = formHost.querySelector("small");
+        if (record) {
+          small.innerHTML = '<strong>Demo booking found.</strong> '+window.BookingUtils.esc(record.train.name)+' · '+window.BookingUtils.esc(record.train.number)+'<br>'+window.BookingUtils.esc(record.train.source)+' → '+window.BookingUtils.esc(record.train.destination)+' · '+window.BookingUtils.dateLabel(record.train.date)+' · '+record.passengers+' passenger'+(record.passengers===1?'':'s')+'<br>Status: <b>'+window.BookingUtils.esc(record.status)+'</b> · Total: <b>'+money(record.total)+'</b>';
+        } else {
+          small.textContent = 'No demo booking was found for that PNR or booking reference on this browser. Complete a mock booking first.';
+        }
+      } else {
+        renderTrackResult(findTrackRecord(input.value), input.value.trim());
+      }
       return;
     }
 

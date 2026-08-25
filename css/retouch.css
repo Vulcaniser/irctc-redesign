@@ -2106,3 +2106,840 @@ html[data-theme="light"] .footer-info__close:hover { color: #26344a; background:
   .footer-info__backdrop,
   .footer-info__dialog { transition: none !important; }
 }
+
+
+/* SEARCH RESULT PAGINATION
+   Five timetable cards per page, with a deliberately compact three-page cap.
+   The controls inherit the site's existing ticket-card language in both themes. */
+.search-results__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  margin: 1.5rem auto 0;
+}
+
+.search-results__page {
+  min-width: 2.35rem;
+  height: 2.35rem;
+  padding: 0 .65rem;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 10px;
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font: inherit;
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--transition-base) var(--easing-standard),
+    border-color var(--transition-base) var(--easing-standard),
+    background-color var(--transition-base) var(--easing-standard),
+    color var(--transition-base) var(--easing-standard);
+}
+
+.search-results__page:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: var(--color-accent-500);
+}
+
+.search-results__page.is-active {
+  border-color: var(--color-accent-500);
+  background: var(--color-accent-500);
+  color: #fff;
+}
+
+.search-results__page--arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.search-results__page:disabled {
+  opacity: .38;
+  cursor: default;
+}
+
+@media (max-width: 520px) {
+  .search-results__pagination {
+    gap: .3rem;
+  }
+
+  .search-results__page {
+    min-width: 2.15rem;
+    height: 2.15rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search-results__page {
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Train search result readability + spacing
+   Scoped only to the generated train-result cards.
+   -------------------------------------------------------------------------- */
+.train-card {
+  color: #eef2f7;
+}
+
+.train-card__header {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  row-gap: .45rem;
+}
+
+.train-card__name {
+  color: #f7f9fc;
+  line-height: 1.3;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.train-card__number {
+  color: #b8c3d3;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.train-card__route {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(110px, .7fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.train-card__stop {
+  min-width: 0;
+}
+
+.train-card__stop:last-child {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.train-card__time {
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.train-card__station {
+  color: #b7c1d0;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.train-card__duration {
+  color: #cbd4e0;
+  line-height: 1.35;
+  min-width: 0;
+}
+
+.train-card__duration span,
+.train-card__duration small {
+  text-align: center;
+  white-space: normal;
+}
+
+.train-card__duration small {
+  color: #aeb9c9;
+  line-height: 1.4;
+}
+
+.train-card__classes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: .75rem;
+}
+
+.train-card__class-option {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255,255,255,.035);
+  border-color: rgba(255,255,255,.14);
+  padding: .8rem .9rem;
+}
+
+.train-card__class-name {
+  color: #f3f6fa;
+  line-height: 1.25;
+}
+
+.train-card__fare {
+  color: #ffd39b;
+  font-size: 1.02rem;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.train-card__class-option .train-card__availability {
+  color: #b8c3d3;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.train-card__actions {
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: .15rem;
+}
+
+.train-card__actions > .train-card__availability {
+  flex: 1 1 280px;
+  color: #aeb9c9;
+  line-height: 1.5;
+  min-width: 0;
+}
+
+/* Light theme: deliberately explicit contrast so card text never inherits
+   the darker default variables used elsewhere in the site. */
+html[data-theme="light"] .train-card {
+  color: #263247;
+}
+
+html[data-theme="light"] .train-card__name {
+  color: #172238;
+}
+
+html[data-theme="light"] .train-card__number {
+  color: #53627a;
+}
+
+html[data-theme="light"] .train-card__time {
+  color: #14233d;
+}
+
+html[data-theme="light"] .train-card__station {
+  color: #53627a;
+}
+
+html[data-theme="light"] .train-card__duration {
+  color: #41516a;
+}
+
+html[data-theme="light"] .train-card__duration small {
+  color: #68758a;
+}
+
+html[data-theme="light"] .train-card__class-option {
+  background: rgba(255,255,255,.68);
+  border-color: rgba(43,53,68,.15);
+}
+
+html[data-theme="light"] .train-card__class-name {
+  color: #24324a;
+}
+
+html[data-theme="light"] .train-card__fare {
+  color: #214d8a;
+}
+
+html[data-theme="light"] .train-card__class-option .train-card__availability {
+  color: #66748a;
+}
+
+html[data-theme="light"] .train-card__actions > .train-card__availability {
+  color: #5e6d82;
+}
+
+@media (max-width: 700px) {
+  .train-card__route {
+    grid-template-columns: minmax(0, 1fr) minmax(88px, .55fr) minmax(0, 1fr);
+    gap: .75rem;
+  }
+
+  .train-card__classes {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .train-card__route {
+    grid-template-columns: 1fr;
+    gap: .9rem;
+  }
+
+  .train-card__stop,
+  .train-card__stop:last-child {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .train-card__duration {
+    align-items: flex-start;
+    padding-block: .15rem;
+  }
+
+  .train-card__duration span,
+  .train-card__duration small {
+    text-align: left;
+  }
+
+  .train-card__duration::before {
+    width: 100%;
+  }
+
+  .train-card__classes {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ========================================================================== 
+   FINAL VISUAL RHYTHM PASS
+   A restrained secondary palette plus spacing fixes for dense text groups.
+   No interaction, data, sizing contract, or booking/search behavior changes.
+   ========================================================================== */
+:root {
+  --retouch-teal: #55aaa4;
+  --retouch-teal-soft: rgba(85,170,164,.11);
+  --retouch-violet: #8a82c7;
+  --retouch-violet-soft: rgba(138,130,199,.11);
+}
+
+/* Add small colour notes to secondary UI elements rather than recolouring
+   primary CTAs. The alternating treatment is intentionally subtle. */
+.quick-action-card:nth-child(2) .quick-action-card__icon,
+.service-card:nth-child(2) .service-card__icon {
+  color: var(--retouch-teal);
+  border-color: rgba(85,170,164,.22);
+  background: var(--retouch-teal-soft);
+}
+
+.quick-action-card:nth-child(3) .quick-action-card__icon,
+.service-card:nth-child(3) .service-card__icon {
+  color: var(--retouch-violet);
+  border-color: rgba(138,130,199,.22);
+  background: var(--retouch-violet-soft);
+}
+
+.quick-action-card:nth-child(2):hover .quick-action-card__arrow,
+.service-card:nth-child(2):hover .service-card__arrow,
+.service-card:nth-child(2):focus-visible .service-card__arrow {
+  color: var(--retouch-teal);
+}
+
+.quick-action-card:nth-child(3):hover .quick-action-card__arrow,
+.service-card:nth-child(3):hover .service-card__arrow,
+.service-card:nth-child(3):focus-visible .service-card__arrow {
+  color: var(--retouch-violet);
+}
+
+/* Search header: title and query become two clear visual groups instead of
+   competing on one cramped baseline. */
+.search-results__header {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(280px, 1fr);
+  align-items: end;
+  column-gap: clamp(1.25rem, 4vw, 3.5rem);
+  row-gap: .85rem;
+}
+
+.search-results__title {
+  margin: 0;
+  min-width: 0;
+}
+
+.search-results__route-summary {
+  justify-self: end;
+  min-width: min(100%, 390px);
+  max-width: 520px;
+  display: grid;
+  gap: .28rem;
+  padding: .72rem .9rem .78rem 1rem;
+  border: 1px solid rgba(85,170,164,.18);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(85,170,164,.07), rgba(138,130,199,.045));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+.search-results__route-label {
+  color: #79b9b4;
+  font-family: var(--font-family-mono, ui-monospace, monospace);
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.search-results__route-line {
+  display: flex;
+  align-items: center;
+  gap: .62rem;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.search-results__route-line strong {
+  min-width: 0;
+  color: #eef3fb;
+  font-size: .95rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.search-results__route-arrow {
+  flex: 0 0 auto;
+  color: #f0b05d;
+  font-size: .95rem;
+}
+
+.search-results__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .3rem .75rem;
+  color: #91a0b6;
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+.search-results__meta span {
+  position: relative;
+}
+
+.search-results__meta span + span::before {
+  content: "";
+  position: absolute;
+  left: -.45rem;
+  top: 50%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #64758c;
+  transform: translateY(-50%);
+}
+
+/* Give dense result-card internals a little more breathing room at normal
+   desktop widths, while retaining the compact boarding-pass character. */
+.train-card__header {
+  column-gap: 1rem;
+}
+
+.train-card__route {
+  row-gap: .9rem;
+}
+
+.train-card__station {
+  max-width: 24ch;
+}
+
+.train-card__classes {
+  row-gap: .8rem;
+}
+
+.train-card__actions > .train-card__availability {
+  max-width: 62ch;
+}
+
+/* Service cards: prevent long labels/descriptions from visually colliding
+   with the arrow column. */
+.service-card > span:nth-child(2) {
+  min-width: 0;
+}
+
+.service-card strong,
+.service-card small {
+  overflow-wrap: anywhere;
+}
+
+.services__hint,
+.quick-actions__hint,
+.railway-moments__hint {
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) {
+  .search-results__header {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .search-results__route-summary {
+    justify-self: stretch;
+    min-width: 0;
+    max-width: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .search-results__header {
+    row-gap: .7rem;
+  }
+
+  .search-results__route-summary {
+    padding: .72rem .8rem;
+  }
+
+  .search-results__route-line strong {
+    font-size: .9rem;
+  }
+
+  .search-results__meta {
+    gap: .28rem .65rem;
+  }
+
+  .train-card__station {
+    max-width: 100%;
+  }
+}
+
+/* Light mode: keep the same secondary accents, but use airy surfaces and
+   darker text so the added colour remains refined rather than pastel-heavy. */
+html[data-theme="light"] .quick-action-card:nth-child(2) .quick-action-card__icon,
+html[data-theme="light"] .service-card:nth-child(2) .service-card__icon {
+  color: #397f7b;
+  border-color: rgba(63,143,138,.2);
+  background: rgba(63,143,138,.075);
+}
+
+html[data-theme="light"] .quick-action-card:nth-child(3) .quick-action-card__icon,
+html[data-theme="light"] .service-card:nth-child(3) .service-card__icon {
+  color: #6d67a8;
+  border-color: rgba(109,103,168,.18);
+  background: rgba(109,103,168,.07);
+}
+
+html[data-theme="light"] .quick-action-card:nth-child(2):hover .quick-action-card__arrow,
+html[data-theme="light"] .service-card:nth-child(2):hover .service-card__arrow,
+html[data-theme="light"] .service-card:nth-child(2):focus-visible .service-card__arrow {
+  color: #397f7b;
+}
+
+html[data-theme="light"] .quick-action-card:nth-child(3):hover .quick-action-card__arrow,
+html[data-theme="light"] .service-card:nth-child(3):hover .service-card__arrow,
+html[data-theme="light"] .service-card:nth-child(3):focus-visible .service-card__arrow {
+  color: #6d67a8;
+}
+
+html[data-theme="light"] .search-results__route-summary {
+  border-color: rgba(63,143,138,.16);
+  background: linear-gradient(145deg, rgba(63,143,138,.055), rgba(109,103,168,.035));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+}
+
+html[data-theme="light"] .search-results__route-label {
+  color: #397f7b;
+}
+
+html[data-theme="light"] .search-results__route-line strong {
+  color: #24324a;
+}
+
+html[data-theme="light"] .search-results__route-arrow {
+  color: #b45c18;
+}
+
+html[data-theme="light"] .search-results__meta {
+  color: #66748a;
+}
+
+html[data-theme="light"] .search-results__meta span + span::before {
+  background: #9ba6b6;
+}
+
+/* --------------------------------------------------------------------------
+   Colour vitality pass — deliberately more visible, still restrained.
+   These are visual-only treatments; no interaction or layout contracts change.
+   -------------------------------------------------------------------------- */
+body {
+  background:
+    radial-gradient(circle at 8% 18%, rgba(63,143,138,.10), transparent 23rem),
+    radial-gradient(circle at 92% 42%, rgba(138,130,199,.09), transparent 26rem),
+    radial-gradient(circle at 50% 92%, rgba(232,196,104,.08), transparent 30rem),
+    var(--color-bg-base);
+}
+
+.navbar {
+  background:
+    radial-gradient(circle at 14% 50%, rgba(85,170,164,.13), transparent 18rem),
+    radial-gradient(circle at 88% 50%, rgba(138,130,199,.10), transparent 20rem),
+    var(--color-midnight-800);
+}
+
+.hero {
+  background:
+    radial-gradient(circle at 18% 35%, rgba(63,143,138,.17), transparent 25rem),
+    radial-gradient(circle at 82% 22%, rgba(138,130,199,.15), transparent 27rem),
+    radial-gradient(circle at 62% 86%, rgba(232,196,104,.10), transparent 24rem),
+    var(--gradient-hero);
+}
+
+.hero__subtext::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: .55rem;
+  border-radius: 50%;
+  background: var(--color-accent-teal-500);
+  box-shadow: 0 0 14px rgba(85,170,164,.65);
+  vertical-align: .08em;
+}
+
+.booking-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 4% 8%, rgba(85,170,164,.12), transparent 15rem),
+    radial-gradient(circle at 96% 90%, rgba(138,130,199,.10), transparent 16rem);
+}
+
+.quick-actions,
+.search-results,
+.railway-moments {
+  position: relative;
+}
+
+.quick-actions::after,
+.search-results::after,
+.railway-moments::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: .7;
+  z-index: -1;
+}
+
+.quick-actions::after {
+  left: -8rem;
+  top: 12rem;
+  background: radial-gradient(circle, rgba(63,143,138,.13), transparent 68%);
+}
+
+.search-results::after {
+  right: -8rem;
+  top: 10rem;
+  background: radial-gradient(circle, rgba(138,130,199,.12), transparent 68%);
+}
+
+.railway-moments::after {
+  left: 42%;
+  bottom: -8rem;
+  background: radial-gradient(circle, rgba(232,196,104,.10), transparent 68%);
+}
+
+.quick-action-card:nth-child(1) { box-shadow: inset 0 3px 0 rgba(239,154,61,.72); }
+.quick-action-card:nth-child(2) { box-shadow: inset 0 3px 0 rgba(85,170,164,.72); }
+.quick-action-card:nth-child(3) { box-shadow: inset 0 3px 0 rgba(138,130,199,.72); }
+.quick-action-card:nth-child(4) { box-shadow: inset 0 3px 0 rgba(232,196,104,.72); }
+
+.quick-action-card:nth-child(2) .quick-action-card__icon {
+  color: var(--color-accent-teal-500);
+  border-color: rgba(85,170,164,.32);
+  background: rgba(85,170,164,.13);
+}
+
+.quick-action-card:nth-child(3) .quick-action-card__icon {
+  color: #aaa4e0;
+  border-color: rgba(138,130,199,.34);
+  background: rgba(138,130,199,.13);
+}
+
+.quick-action-card:nth-child(4) .quick-action-card__icon {
+  color: var(--color-gold-400);
+  border-color: rgba(232,196,104,.32);
+  background: rgba(232,196,104,.12);
+}
+
+.train-card:nth-child(3n + 1) { border-top-color: rgba(239,154,61,.48); }
+.train-card:nth-child(3n + 2) { border-top-color: rgba(85,170,164,.48); }
+.train-card:nth-child(3n) { border-top-color: rgba(138,130,199,.48); }
+
+.footer {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(63,143,138,.11), transparent 22rem),
+    radial-gradient(circle at 82% 70%, rgba(138,130,199,.10), transparent 24rem),
+    var(--color-midnight-900);
+}
+
+/* Light mode: stronger colour presence comes from daylight tints rather than
+   saturated fills, preserving the clean editorial character. */
+html[data-theme="light"] body {
+  background:
+    radial-gradient(circle at 8% 10%, rgba(63,143,138,.16), transparent 24rem),
+    radial-gradient(circle at 92% 28%, rgba(138,130,199,.13), transparent 25rem),
+    radial-gradient(circle at 55% 96%, rgba(232,196,104,.13), transparent 28rem),
+    #f5f1e9;
+}
+
+html[data-theme="light"] .navbar {
+  background:
+    radial-gradient(circle at 14% 50%, rgba(63,143,138,.10), transparent 18rem),
+    radial-gradient(circle at 88% 50%, rgba(138,130,199,.08), transparent 20rem),
+    rgba(250,248,243,.92);
+}
+
+html[data-theme="light"] .hero {
+  background:
+    radial-gradient(circle at 15% 35%, rgba(63,143,138,.15), transparent 24rem),
+    radial-gradient(circle at 82% 18%, rgba(138,130,199,.14), transparent 27rem),
+    radial-gradient(circle at 60% 88%, rgba(232,196,104,.14), transparent 24rem),
+    linear-gradient(180deg, #f8f4ec 0%, #eee9df 100%);
+}
+
+html[data-theme="light"] .booking-card::before {
+  background:
+    radial-gradient(circle at 4% 8%, rgba(63,143,138,.10), transparent 15rem),
+    radial-gradient(circle at 96% 90%, rgba(138,130,199,.09), transparent 16rem);
+}
+
+html[data-theme="light"] .quick-action-card:nth-child(1) { box-shadow: inset 0 3px 0 rgba(201,109,35,.60); }
+html[data-theme="light"] .quick-action-card:nth-child(2) { box-shadow: inset 0 3px 0 rgba(63,143,138,.60); }
+html[data-theme="light"] .quick-action-card:nth-child(3) { box-shadow: inset 0 3px 0 rgba(109,103,168,.60); }
+html[data-theme="light"] .quick-action-card:nth-child(4) { box-shadow: inset 0 3px 0 rgba(184,145,45,.62); }
+
+html[data-theme="light"] .quick-action-card:nth-child(2) .quick-action-card__icon {
+  color: #347f7a;
+  border-color: rgba(63,143,138,.30);
+  background: rgba(63,143,138,.12);
+}
+
+html[data-theme="light"] .quick-action-card:nth-child(3) .quick-action-card__icon {
+  color: #655f9f;
+  border-color: rgba(109,103,168,.28);
+  background: rgba(109,103,168,.11);
+}
+
+html[data-theme="light"] .quick-action-card:nth-child(4) .quick-action-card__icon {
+  color: #9a761e;
+  border-color: rgba(184,145,45,.28);
+  background: rgba(232,196,104,.16);
+}
+
+html[data-theme="light"] .train-card:nth-child(3n + 1) { border-top-color: rgba(201,109,35,.48); }
+html[data-theme="light"] .train-card:nth-child(3n + 2) { border-top-color: rgba(63,143,138,.48); }
+html[data-theme="light"] .train-card:nth-child(3n) { border-top-color: rgba(109,103,168,.48); }
+
+html[data-theme="light"] .footer {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(63,143,138,.12), transparent 22rem),
+    radial-gradient(circle at 82% 70%, rgba(138,130,199,.11), transparent 24rem),
+    #10182b;
+}
+
+/* Final dark-mode refinement: give the navigation its own deeper anchor so
+   it reads as a calm, premium frame against the more colourful page. */
+html[data-theme="dark"] .navbar {
+  background:
+    linear-gradient(90deg, rgba(4, 8, 19, .98), rgba(7, 13, 29, .985) 52%, rgba(10, 16, 35, .98)),
+    var(--color-midnight-900);
+  border-bottom-color: rgba(148, 164, 205, .11);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+}
+
+html[data-theme="dark"] .navbar::after {
+  opacity: .78;
+}
+
+/* Quick Actions: saved booking and tracking cards */
+.quick-bookings-list{display:grid;gap:.75rem}
+.quick-booking-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem;align-items:center;padding:1rem;border:1px solid var(--color-border-default);border-radius:14px;background:rgba(255,255,255,.035)}
+.quick-booking-item>div:first-child{display:grid;gap:.28rem;min-width:0}
+.quick-booking-item span,.quick-booking-item small{color:var(--color-text-secondary);overflow-wrap:anywhere}
+.quick-booking-item__meta{display:grid;gap:.3rem;text-align:right;white-space:nowrap}
+.quick-booking-item__meta b{color:#5fc2b8;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+html[data-theme="light"] .quick-booking-item{background:rgba(255,255,255,.76);border-color:rgba(38,49,64,.12)}
+html[data-theme="light"] .quick-booking-item__meta b{color:#267c76}
+@media(max-width:620px){.quick-booking-item{grid-template-columns:1fr}.quick-booking-item__meta{text-align:left;grid-template-columns:auto auto;justify-content:start;gap:.8rem}}
+
+
+/* --------------------------------------------------------------------------
+   Search result journey-preferences card
+   Keep the compact summary readable inside the 260px inventory filter rail.
+   -------------------------------------------------------------------------- */
+.search-results__filter-summary{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:.65rem;
+  min-width:0;
+}
+.search-results__filter-summary strong{
+  display:block;
+  color:#f2f5fb;
+  font-size:.78rem;
+  line-height:1.3;
+  letter-spacing:.02em;
+}
+.search-results__filter-summary > span{
+  display:block;
+  min-width:0;
+  width:100%;
+  padding:.55rem .65rem;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:10px;
+  background:rgba(255,255,255,.035);
+  color:#d9e1ec;
+  font-size:.78rem;
+  line-height:1.35;
+  overflow-wrap:anywhere;
+}
+.search-results__filter-summary small{
+  display:block;
+  margin-top:.05rem;
+  color:#8794a8;
+  font-size:.68rem;
+  line-height:1.45;
+  overflow-wrap:anywhere;
+}
+html[data-theme="light"] .search-results__filter-summary strong{color:#26354b}
+html[data-theme="light"] .search-results__filter-summary > span{
+  background:rgba(255,255,255,.72);
+  border-color:rgba(43,53,68,.12);
+  color:#42526a;
+}
+html[data-theme="light"] .search-results__filter-summary small{color:#718096}
+
+@media (max-width:1024px){
+  .search-results__filter-summary{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    align-items:start;
+  }
+  .search-results__filter-summary strong{
+    grid-column:1/-1;
+  }
+  .search-results__filter-summary small{
+    grid-column:1/-1;
+  }
+}
+@media (max-width:600px){
+  .search-results__filter-summary{
+    grid-template-columns:1fr;
+  }
+  .search-results__filter-summary strong,
+  .search-results__filter-summary small{
+    grid-column:auto;
+  }
+}
+
+/* The sub-page theme control is a true viewport-level control, matching the
+   homepage's bottom-right placement rather than participating in the header. */
+.booking-page .page-theme-toggle{
+  position:fixed !important;
+  right:clamp(16px,2.2vw,30px) !important;
+  bottom:clamp(16px,2.2vw,30px) !important;
+  left:auto !important;
+  top:auto !important;
+  margin:0 !important;
+  transform-origin:center;
+}
+@media(max-width:768px){
+  .booking-page .page-theme-toggle{
+    right:16px !important;
+    bottom:16px !important;
+  }
+}

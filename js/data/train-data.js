@@ -3,8 +3,10 @@
    Curated timetable snapshot researched from public timetable pages in
    August 2026. This is NOT live IRCTC/PRS availability.
 
-   Class codes are the classes offered by the researched service. No seat
-   counts or confirmation probabilities are fabricated here.
+   Class codes are the classes offered by the researched service. New route
+   entries also carry route-level indicative adult fares from the researched
+   timetable snapshot. These are not live IRCTC/PRS availability or dynamic
+   booking quotes.
    ========================================================================== */
 window.TRAIN_DATA = {
   "JP-NDLS": [
@@ -423,5 +425,198 @@ window.TRAIN_DATA = {
   "ADI-GHY": [
     {number:"15635",name:"Guwahati Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"21:40",toCode:"GHY",toName:"Guwahati",toTime:"06:10",duration:"56h 30m",days:["Weekly"],classes:["2A","3A","SL"]},
     {number:"15667",name:"Kamakhya Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"21:40",toCode:"KYQ",toName:"Kamakhya",toTime:"05:20",duration:"55h 40m",days:["Weekly"],classes:["1A","2A","3A","SL"]}
-  ]
+  ],
+  "ADI-HWH": [
+    {number:"12833",name:"ADI HWH Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"00:25",toCode:"HWH",toName:"Howrah Jn",toTime:"14:20",duration:"37h 55m",days:["Daily"],classes:["2A","3A","SL"],fares:{"SL":730,"3A":1950,"2A":2880,"1A":4975}},
+    {number:"12905",name:"Shalimar SF Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"17:30",toCode:"SHM",toName:"Shalimar",toTime:"04:35",duration:"35h 05m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":730,"3A":1950,"2A":2880,"1A":4975}},
+    {number:"22905",name:"Okha Shalimar SF Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"17:30",toCode:"SHM",toName:"Shalimar",toTime:"04:35",duration:"35h 05m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":730,"3A":1950,"2A":2880,"1A":4975}},
+    {number:"12949",name:"Kavijuru Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"17:30",toCode:"SRC",toName:"Santragachi Jn",toTime:"07:30",duration:"38h 00m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":730,"3A":1950,"2A":2880,"1A":4975}},
+    {number:"19413",name:"ADI Kolkata Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"21:05",toCode:"KOAA",toName:"Kolkata",toTime:"15:15",duration:"42h 10m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":730,"3A":1950,"2A":2880,"1A":4975}}
+  ],
+  "HWH-ADI": [
+    {number:"19414",name:"Kolkata Ahmedabad Express",fromCode:"KOAA",fromName:"Kolkata",fromTime:"13:10",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"07:25",duration:"42h 15m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":730,"3A":1950,"2A":2880,"1A":4975}},
+    {number:"12950",name:"Kavijuru Express",fromCode:"SRC",fromName:"Santragachi Jn",fromTime:"19:50",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"08:30",duration:"36h 40m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":730,"3A":1950,"2A":2880,"1A":4975}},
+    {number:"22830",name:"Shalimar Bhuj SF Express",fromCode:"SHM",fromName:"Shalimar",fromTime:"19:50",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"07:45",duration:"35h 55m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":730,"3A":1950,"2A":2880,"1A":4975}},
+    {number:"12906",name:"Shalimar Porbandar SF Express",fromCode:"SHM",fromName:"Shalimar",fromTime:"20:15",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"05:55",duration:"33h 40m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":730,"3A":1950,"2A":2880,"1A":4975}},
+    {number:"12938",name:"Garbha Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"23:00",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"08:55",duration:"33h 55m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":730,"3A":1950,"2A":2880,"1A":4975}}
+  ],
+  "ADI-SBC": [
+    {number:"16588",name:"Bikaner YPR Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"07:00",toCode:"YPR",toName:"Yasvantpur Jn",toTime:"16:00",duration:"33h 00m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":610,"3A":1640,"2A":2405,"1A":4130}},
+    {number:"16613",name:"RJT CBE Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"09:35",toCode:"KJM",toName:"Krishnarajapuram",toTime:"12:23",duration:"26h 48m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":610,"3A":1640,"2A":2405,"1A":4130}},
+    {number:"19568",name:"Vivek Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"09:35",toCode:"KJM",toName:"Krishnarajapuram",toTime:"12:23",duration:"26h 48m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL","3E"],fares:{"SL":610,"3A":1640,"2A":2405,"1A":4130}},
+    {number:"20685",name:"GIMB SBC SF Express",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"14:05",toCode:"SBC",toName:"KSR Bengaluru",toTime:"20:40",duration:"30h 35m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":610,"3A":1640,"2A":2405,"1A":4130}},
+    {number:"22689",name:"ADI YPR Superfast",fromCode:"ADI",fromName:"Ahmedabad Jn",fromTime:"19:00",toCode:"YPR",toName:"Yasvantpur Jn",toTime:"02:30",duration:"31h 30m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":610,"3A":1640,"2A":2405,"1A":4130}}
+  ],
+  "SBC-ADI": [
+    {number:"16614",name:"CBE RJT Express",fromCode:"KJM",fromName:"Krishnarajapuram",fromTime:"07:00",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"13:25",duration:"30h 25m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":600,"3A":1625,"2A":2375,"1A":4085}},
+    {number:"22498",name:"SGNR Humsafar",fromCode:"KJM",fromName:"Krishnarajapuram",fromTime:"10:50",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"18:10",duration:"31h 20m",days:["M","T","W","T","F","S","S"],classes:["3A"],fares:{"SL":600,"3A":1625,"2A":2375,"1A":4085}},
+    {number:"19567",name:"Vivek Express",fromCode:"YNK",fromName:"Yelahanka Jn",fromTime:"11:40",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"18:10",duration:"30h 30m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL","3E"],fares:{"SL":600,"3A":1625,"2A":2375,"1A":4085}},
+    {number:"16587",name:"Bikaner Express",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"12:00",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"19:55",duration:"31h 55m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","CC","SL"],fares:{"SL":600,"3A":1625,"2A":2375,"1A":4085}},
+    {number:"22690",name:"Ahmedabad Express",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"16:45",toCode:"ADI",toName:"Ahmedabad Jn",toTime:"01:00",duration:"32h 15m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":600,"3A":1625,"2A":2375,"1A":4085}}
+  ],
+  "GHY-HWH": [
+    {number:"15960",name:"Kamrup Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"08:30",toCode:"HWH",toName:"Howrah Jn",toTime:"04:40",duration:"20h 10m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":490,"3A":1305,"2A":1870,"1A":3185}},
+    {number:"12346",name:"Saraighat Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"12:40",toCode:"HWH",toName:"Howrah Jn",toTime:"05:20",duration:"16h 40m",days:["Daily"],classes:["1A","2A","3A","SL"],fares:{"SL":490,"3A":1305,"2A":1870,"1A":3185}},
+    {number:"13182",name:"Kaziranga Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"17:40",toCode:"KOAA",toName:"Kolkata",toTime:"12:05",duration:"18h 25m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL","3E"],fares:{"SL":490,"3A":1305,"2A":1870,"1A":3185}},
+    {number:"22512",name:"Karmabhoomi Express",fromCode:"KYQ",fromName:"Kamakhya",fromTime:"18:00",toCode:"DKAE",toName:"Dankuni (Howrah)",toTime:"13:02",duration:"19h 02m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":490,"3A":1305,"2A":1870,"1A":3185}},
+    {number:"27576",name:"Vande Bharat Express",fromCode:"KYQ",fromName:"Kamakhya",fromTime:"18:15",toCode:"HWH",toName:"Howrah Jn",toTime:"08:15",duration:"14h 00m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":490,"3A":1305,"2A":1870,"1A":3185}}
+  ],
+  "HWH-GHY": [
+    {number:"15673",name:"KYQ Amrit Bharat",fromCode:"ADL",fromName:"Andul",fromTime:"02:05",toCode:"KYQ",toName:"Kamakhya",toTime:"22:00",duration:"19h 55m",days:["M","T","W","T","F","S","S"],classes:["SL"],fares:{"SL":450,"3A":1225,"2A":1775,"1A":3020}},
+    {number:"13173",name:"Kanchanjunga Express",fromCode:"SDAH",fromName:"Sealdah",fromTime:"06:50",toCode:"GHY",toName:"Guwahati",toTime:"02:40",duration:"19h 50m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":450,"3A":1225,"2A":1775,"1A":3020}},
+    {number:"15643",name:"Puri Kamakhya Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"07:30",toCode:"KYQ",toName:"Kamakhya",toTime:"05:20",duration:"21h 50m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":450,"3A":1225,"2A":1775,"1A":3020}},
+    {number:"13181",name:"Kaziranga Express",fromCode:"KOAA",fromName:"Kolkata",fromTime:"09:05",toCode:"GHY",toName:"Guwahati",toTime:"03:45",duration:"18h 40m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL","3E"],fares:{"SL":450,"3A":1225,"2A":1775,"1A":3020}},
+    {number:"12509",name:"Guwahati Express",fromCode:"DKAE",fromName:"Dankuni (Howrah)",fromTime:"09:37",toCode:"GHY",toName:"Guwahati",toTime:"04:50",duration:"19h 13m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":450,"3A":1225,"2A":1775,"1A":3020}}
+  ],
+  "LKO-HWH": [
+    {number:"12354",name:"LKU HWH SF Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"01:20",toCode:"HWH",toName:"Howrah Jn",toTime:"18:25",duration:"17h 05m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL","3E"],fares:{"SL":455,"3A":1235,"2A":1785,"1A":3040}},
+    {number:"13020",name:"Bagh Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"06:20",toCode:"HWH",toName:"Howrah Jn",toTime:"11:15",duration:"28h 55m",days:["Daily"],classes:["2A","3A","SL"],fares:{"SL":455,"3A":1235,"2A":1785,"1A":3040}},
+    {number:"13010",name:"Doon Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"08:50",toCode:"HWH",toName:"Howrah Jn",toTime:"07:00",duration:"22h 10m",days:["Daily"],classes:["1A","2A","3A","SL"],fares:{"SL":455,"3A":1235,"2A":1785,"1A":3040}},
+    {number:"13006",name:"ASR HWH Mail",fromCode:"LKO",fromName:"Lucknow",fromTime:"10:50",toCode:"HWH",toName:"Howrah Jn",toTime:"07:25",duration:"20h 35m",days:["Daily"],classes:["1A","2A","3A","SL"],fares:{"SL":455,"3A":1235,"2A":1785,"1A":3040}},
+    {number:"13042",name:"Himgiri Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"15:30",toCode:"HWH",toName:"Howrah Jn",toTime:"11:30",duration:"20h 00m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":455,"3A":1235,"2A":1785,"1A":3040}}
+  ],
+  "HWH-LKO": [
+    {number:"12353",name:"HWH LKU Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"08:15",toCode:"LKO",toName:"Lucknow",toTime:"00:55",duration:"16h 40m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL","3E"],fares:{"SL":455,"3A":1235,"2A":1785,"1A":3040}},
+    {number:"12371",name:"HWH BKN SF Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"08:15",toCode:"LKO",toName:"Lucknow",toTime:"00:55",duration:"16h 40m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":455,"3A":1235,"2A":1785,"1A":3040}},
+    {number:"12357",name:"Durgiana Express",fromCode:"KOAA",fromName:"Kolkata",fromTime:"12:10",toCode:"LKO",toName:"Lucknow",toTime:"02:30",duration:"14h 20m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":455,"3A":1235,"2A":1785,"1A":3040}},
+    {number:"13035",name:"Upasana Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"13:00",toCode:"LKO",toName:"Lucknow",toTime:"07:20",duration:"18h 20m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":455,"3A":1235,"2A":1785,"1A":3040}},
+    {number:"13005",name:"HWH ASR Mail",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"19:20",toCode:"LKO",toName:"Lucknow",toTime:"15:20",duration:"20h 00m",days:["Daily"],classes:["1A","2A","3A","SL"],fares:{"SL":455,"3A":1235,"2A":1785,"1A":3040}}
+  ],
+  "NDLS-HWH": [
+    {number:"13052",name:"Netaji Express",fromCode:"DLI",fromName:"Delhi",fromTime:"06:15",toCode:"HWH",toName:"Howrah Jn",toTime:"08:05",duration:"25h 50m",days:["Daily"],classes:["1A","2A","3A","SL"],fares:{"SL":620,"3A":1620,"2A":2400,"1A":4100}},
+    {number:"12324",name:"BME HWH SF Express",fromCode:"DLI",fromName:"Delhi",fromTime:"07:50",toCode:"HWH",toName:"Howrah Jn",toTime:"05:45",duration:"21h 55m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":620,"3A":1620,"2A":2400,"1A":4100}},
+    {number:"12274",name:"HWH Duronto Express",fromCode:"NDLS",fromName:"New Delhi",fromTime:"12:35",toCode:"HWH",toName:"Howrah Jn",toTime:"10:35",duration:"22h 00m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","2S","3E"],fares:{"SL":620,"3A":1620,"2A":2400,"1A":4100}},
+    {number:"12314",name:"Sealdah Rajdhani",fromCode:"NDLS",fromName:"New Delhi",fromTime:"16:30",toCode:"SDAH",toName:"Sealdah",toTime:"10:10",duration:"17h 40m",days:["Daily"],classes:["1A","2A","3A"],fares:{"SL":620,"3A":1620,"2A":2400,"1A":4100}},
+    {number:"12302",name:"HWH Rajdhani",fromCode:"NDLS",fromName:"New Delhi",fromTime:"16:50",toCode:"HWH",toName:"Howrah Jn",toTime:"09:55",duration:"17h 05m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":620,"3A":1620,"2A":2400,"1A":4100}}
+  ],
+  "HWH-NDLS": [
+    {number:"12303",name:"Poorva Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"08:00",toCode:"NDLS",toName:"New Delhi",toTime:"06:05",duration:"22h 05m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":620,"3A":1620,"2A":2400,"1A":4100}},
+    {number:"12381",name:"Poorva Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"08:15",toCode:"NDLS",toName:"New Delhi",toTime:"06:05",duration:"21h 50m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":620,"3A":1620,"2A":2400,"1A":4100}},
+    {number:"12273",name:"NDLS Duronto Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"08:45",toCode:"NDLS",toName:"New Delhi",toTime:"06:40",duration:"21h 55m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","2S","3E"],fares:{"SL":620,"3A":1620,"2A":2400,"1A":4100}},
+    {number:"12305",name:"Rajdhani Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"14:05",toCode:"NDLS",toName:"New Delhi",toTime:"10:05",duration:"20h 00m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":620,"3A":1620,"2A":2400,"1A":4100}},
+    {number:"12301",name:"Rajdhani Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"16:50",toCode:"NDLS",toName:"New Delhi",toTime:"10:05",duration:"17h 15m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":620,"3A":1620,"2A":2400,"1A":4100}}
+  ],
+  "MAS-HWH": [
+    {number:"12842",name:"Coromandel Express",fromCode:"MAS",fromName:"Chennai Central",fromTime:"07:00",toCode:"HWH",toName:"Howrah Jn",toTime:"11:00",duration:"28h 00m",days:["Daily"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":625,"3A":1690,"2A":2480,"1A":4265}},
+    {number:"22808",name:"SRC AC SF Express",fromCode:"MAS",fromName:"Chennai Central",fromTime:"08:15",toCode:"SRC",toName:"Santragachi Jn",toTime:"10:55",duration:"26h 40m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":625,"3A":1690,"2A":2480,"1A":4265}},
+    {number:"22501",name:"New Tinsukia Express",fromCode:"PER",fromName:"Perambur (Chennai)",fromTime:"09:15",toCode:"DKAE",toName:"Dankuni (Howrah)",toTime:"11:26",duration:"26h 11m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":625,"3A":1690,"2A":2480,"1A":4265}},
+    {number:"12666",name:"CAPE HWH SF Express",fromCode:"MS",fromName:"Chennai Egmore",fromTime:"19:05",toCode:"HWH",toName:"Howrah Jn",toTime:"00:05",duration:"29h 00m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":625,"3A":1690,"2A":2480,"1A":4265}},
+    {number:"22826",name:"MAS SHM SF Express",fromCode:"MAS",fromName:"Chennai Central",fromTime:"19:50",toCode:"SHM",toName:"Shalimar",toTime:"00:05",duration:"28h 15m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":625,"3A":1690,"2A":2480,"1A":4265}}
+  ],
+  "HWH-MAS": [
+    {number:"22825",name:"SHM MAS SF Express",fromCode:"SHM",fromName:"Shalimar",fromTime:"12:10",toCode:"MAS",toName:"Chennai Central",toTime:"14:05",duration:"25h 55m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":625,"3A":1690,"2A":2480,"1A":4265}},
+    {number:"12839",name:"Chennai Mail",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"23:45",toCode:"MAS",toName:"Chennai Central",toTime:"03:20",duration:"27h 35m",days:["Daily"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":625,"3A":1690,"2A":2480,"1A":4265}},
+    {number:"20609",name:"Amrit Bharat Express",fromCode:"ADL",fromName:"Andul",fromTime:"04:00",toCode:"MS",toName:"Chennai Egmore",toTime:"08:15",duration:"28h 15m",days:["M","T","W","T","F","S","S"],classes:["SL"],fares:{"SL":625,"3A":1690,"2A":2480,"1A":4265}},
+    {number:"16224",name:"RDP SMVB Express",fromCode:"ADL",fromName:"Andul",fromTime:"07:15",toCode:"PER",toName:"Perambur (Chennai)",toTime:"14:00",duration:"30h 45m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":625,"3A":1690,"2A":2480,"1A":4265}},
+    {number:"12504",name:"Humsafar Express",fromCode:"DKAE",fromName:"Dankuni (Howrah)",fromTime:"11:30",toCode:"PER",toName:"Perambur (Chennai)",toTime:"13:55",duration:"26h 25m",days:["M","T","W","T","F","S","S"],classes:["3A"],fares:{"SL":625,"3A":1690,"2A":2480,"1A":4265}}
+  ],
+  "BCT-HWH": [
+    {number:"12859",name:"Gitanjali Express",fromCode:"CSMT",fromName:"C Shivaji Maharaj T",fromTime:"06:00",toCode:"HWH",toName:"Howrah Jn",toTime:"13:50",duration:"31h 50m",days:["Daily"],classes:["2A","3A","SL","3E"],fares:{"SL":700,"3A":1890,"2A":2780,"1A":4800}},
+    {number:"12869",name:"CSMT Howrah Express",fromCode:"CSMT",fromName:"C Shivaji Maharaj T",fromTime:"11:05",toCode:"HWH",toName:"Howrah Jn",toTime:"20:50",duration:"33h 45m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":700,"3A":1890,"2A":2780,"1A":4800}},
+    {number:"12261",name:"Howrah Duronto",fromCode:"CSMT",fromName:"C Shivaji Maharaj T",fromTime:"17:15",toCode:"HWH",toName:"Howrah Jn",toTime:"20:40",duration:"27h 25m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":700,"3A":1890,"2A":2780,"1A":4800}},
+    {number:"12809",name:"Howrah Mail",fromCode:"CSMT",fromName:"C Shivaji Maharaj T",fromTime:"21:10",toCode:"HWH",toName:"Howrah Jn",toTime:"06:45",duration:"33h 35m",days:["Daily"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":700,"3A":1890,"2A":2780,"1A":4800}},
+    {number:"12322",name:"Kolkata Mail",fromCode:"CSMT",fromName:"C Shivaji Maharaj T",fromTime:"22:15",toCode:"HWH",toName:"Howrah Jn",toTime:"11:10",duration:"36h 55m",days:["Daily"],classes:["1A","2A","3A","SL"],fares:{"SL":700,"3A":1890,"2A":2780,"1A":4800}}
+  ],
+  "HWH-BCT": [
+    {number:"12262",name:"CSMT Duronto Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"05:35",toCode:"CSMT",toName:"C Shivaji Maharaj T",toTime:"08:15",duration:"26h 40m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":700,"3A":1890,"2A":2780,"1A":4800}},
+    {number:"12860",name:"Gitanjali Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"13:40",toCode:"CSMT",toName:"C Shivaji Maharaj T",toTime:"21:20",duration:"31h 40m",days:["Daily"],classes:["2A","3A","SL","3E"],fares:{"SL":700,"3A":1890,"2A":2780,"1A":4800}},
+    {number:"12870",name:"HWH CSMT SF Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"13:55",toCode:"CSMT",toName:"C Shivaji Maharaj T",toTime:"23:45",duration:"33h 50m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":700,"3A":1890,"2A":2780,"1A":4800}},
+    {number:"12810",name:"HWH CSMT Mail",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"19:30",toCode:"CSMT",toName:"C Shivaji Maharaj T",toTime:"04:25",duration:"32h 55m",days:["Daily"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":700,"3A":1890,"2A":2780,"1A":4800}},
+    {number:"12321",name:"Mumbai Mail",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"23:40",toCode:"CSMT",toName:"C Shivaji Maharaj T",toTime:"13:15",duration:"37h 35m",days:["Daily"],classes:["1A","2A","3A","SL"],fares:{"SL":700,"3A":1890,"2A":2780,"1A":4800}}
+  ],
+  "NGP-HWH": [
+    {number:"12869",name:"CSMT Howrah Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"01:15",toCode:"HWH",toName:"Howrah Jn",toTime:"20:50",duration:"19h 35m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":495,"3A":1340,"2A":1950,"1A":3330}},
+    {number:"22511",name:"Karmabhoomi Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"01:25",toCode:"DKAE",toName:"Dankuni (Howrah)",toTime:"19:05",duration:"17h 40m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":495,"3A":1340,"2A":1950,"1A":3330}},
+    {number:"22893",name:"SNSI Howrah Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"01:30",toCode:"HWH",toName:"Howrah Jn",toTime:"20:50",duration:"19h 20m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":495,"3A":1340,"2A":1950,"1A":3330}},
+    {number:"12261",name:"Howrah Duronto",fromCode:"NGP",fromName:"Nagpur",fromTime:"04:15",toCode:"HWH",toName:"Howrah Jn",toTime:"20:40",duration:"16h 25m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":495,"3A":1340,"2A":1950,"1A":3330}},
+    {number:"12809",name:"Howrah Mail",fromCode:"NGP",fromName:"Nagpur",fromTime:"11:20",toCode:"HWH",toName:"Howrah Jn",toTime:"06:45",duration:"19h 25m",days:["Daily"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":495,"3A":1340,"2A":1950,"1A":3330}}
+  ],
+  "HWH-NGP": [
+    {number:"12262",name:"CSMT Duronto Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"05:35",toCode:"NGP",toName:"Nagpur",toTime:"20:50",duration:"15h 15m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":495,"3A":1340,"2A":1950,"1A":3330}},
+    {number:"12222",name:"Pune Duronto Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"05:35",toCode:"NGP",toName:"Nagpur",toTime:"20:50",duration:"15h 15m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":495,"3A":1340,"2A":1950,"1A":3330}},
+    {number:"12860",name:"Gitanjali Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"13:40",toCode:"NGP",toName:"Nagpur",toTime:"07:40",duration:"18h 00m",days:["Daily"],classes:["2A","3A","SL","3E"],fares:{"SL":495,"3A":1340,"2A":1950,"1A":3330}},
+    {number:"12870",name:"HWH CSMT SF Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"13:55",toCode:"NGP",toName:"Nagpur",toTime:"08:00",duration:"18h 05m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":495,"3A":1340,"2A":1950,"1A":3330}},
+    {number:"18030",name:"SHM LTT Express",fromCode:"SHM",fromName:"Shalimar",fromTime:"15:00",toCode:"NGP",toName:"Nagpur",toTime:"13:15",duration:"22h 15m",days:["Daily"],classes:["2A","3A","SL"],fares:{"SL":495,"3A":1340,"2A":1950,"1A":3330}}
+  ],
+  "NGP-SBC": [
+    {number:"22692",name:"SBC Rajdhani",fromCode:"NGP",fromName:"Nagpur",fromTime:"09:30",toCode:"SBC",toName:"KSR Bengaluru",toTime:"05:20",duration:"19h 50m",days:["Daily"],classes:["1A","2A","3A"],fares:{"SL":600,"3A":1600,"2A":2350,"1A":4050}},
+    {number:"12591",name:"GKP YPR Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"04:00",toCode:"YPR",toName:"Yasvantpur Jn",toTime:"02:30",duration:"22h 30m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":600,"3A":1600,"2A":2350,"1A":4050}},
+    {number:"11086",name:"GWL SMVB Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"05:55",toCode:"SMVB",toName:"SMVT Bengaluru",toTime:"07:35",duration:"25h 40m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL","3E"],fares:{"SL":600,"3A":1600,"2A":2350,"1A":4050}},
+    {number:"12214",name:"DEE YPR Duronto",fromCode:"NGP",fromName:"Nagpur",fromTime:"13:30",toCode:"YPR",toName:"Yasvantpur Jn",toTime:"08:20",duration:"18h 50m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":600,"3A":1600,"2A":2350,"1A":4050}},
+    {number:"12976",name:"JP Mysore Express",fromCode:"NGP",fromName:"Nagpur",fromTime:"14:15",toCode:"SBC",toName:"KSR Bengaluru",toTime:"12:30",duration:"22h 15m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","CC","SL","3E"],fares:{"SL":600,"3A":1600,"2A":2350,"1A":4050}}
+  ],
+  "SBC-NGP": [
+    {number:"12295",name:"Sanghamitra Express",fromCode:"SMVB",fromName:"SMVT Bengaluru",fromTime:"09:15",toCode:"NGP",toName:"Nagpur",toTime:"08:35",duration:"23h 20m",days:["Daily"],classes:["1A","2A","3A","SL"],fares:{"SL":600,"3A":1600,"2A":2350,"1A":4050}},
+    {number:"12975",name:"Mysore Jaipur Express",fromCode:"SBC",fromName:"KSR Bengaluru",fromTime:"13:00",toCode:"NGP",toName:"Nagpur",toTime:"11:05",duration:"22h 05m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","CC","SL","3E"],fares:{"SL":600,"3A":1600,"2A":2350,"1A":4050}},
+    {number:"12649",name:"Sampark Kranti",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"13:30",toCode:"NGP",toName:"Nagpur",toTime:"17:05",duration:"27h 35m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":600,"3A":1600,"2A":2350,"1A":4050}},
+    {number:"12539",name:"YPR LKO Express",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"13:30",toCode:"NGP",toName:"Nagpur",toTime:"13:05",duration:"23h 35m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":600,"3A":1600,"2A":2350,"1A":4050}},
+    {number:"15023",name:"GKP YPR Express",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"09:50",toCode:"NGP",toName:"Nagpur",toTime:"10:30",duration:"24h 40m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":600,"3A":1600,"2A":2350,"1A":4050}}
+  ],
+  "SBC-HWH": [
+    {number:"22818",name:"MYS Howrah Express",fromCode:"SBC",fromName:"KSR Bengaluru",fromTime:"02:10",toCode:"HWH",toName:"Howrah Jn",toTime:"11:10",duration:"33h 00m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"22832",name:"YPR HWH SF Express",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"04:30",toCode:"HWH",toName:"Howrah Jn",toTime:"14:05",duration:"33h 35m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"22501",name:"New Tinsukia Express",fromCode:"SMVB",fromName:"SMVT Bengaluru",fromTime:"03:30",toCode:"DKAE",toName:"Dankuni (Howrah)",toTime:"11:26",duration:"31h 56m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"12503",name:"Humsafar Express",fromCode:"SMVB",fromName:"SMVT Bengaluru",fromTime:"10:15",toCode:"HWH",toName:"Howrah Jn",toTime:"12:45",duration:"50h 30m",days:["M","T","W","T","F","S","S"],classes:["3A"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"22306",name:"JSME SMVT Express",fromCode:"SMVB",fromName:"SMVT Bengaluru",fromTime:"10:15",toCode:"DKAE",toName:"Dankuni (Howrah)",toTime:"12:45",duration:"50h 30m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}}
+  ],
+  "HWH-SBC": [
+    {number:"22863",name:"SMVB SF AC Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"10:30",toCode:"SMVB",toName:"SMVT Bengaluru",toTime:"15:45",duration:"29h 15m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"12245",name:"SMVB Duronto Express",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"10:40",toCode:"SMVB",toName:"SMVT Bengaluru",toTime:"15:45",duration:"29h 05m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","2S"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"22887",name:"SMVB Humsafar",fromCode:"HWH",fromName:"Howrah Jn",fromTime:"12:30",toCode:"SMVB",toName:"SMVT Bengaluru",toTime:"19:50",duration:"31h 20m",days:["M","T","W","T","F","S","S"],classes:["3A"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"13434",name:"Amrit Bharat Express",fromCode:"DKAE",fromName:"Dankuni (Howrah)",fromTime:"14:30",toCode:"SMVB",toName:"SMVT Bengaluru",toTime:"03:00",duration:"36h 30m",days:["M","T","W","T","F","S","S"],classes:["SL"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"22502",name:"NTSK SMVB Express",fromCode:"DKAE",fromName:"Dankuni (Howrah)",fromTime:"00:02",toCode:"SMVB",toName:"SMVT Bengaluru",toTime:"09:45",duration:"33h 43m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}}
+  ],
+  "SBC-LKO": [
+    {number:"12539",name:"YPR LKO Express",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"13:30",toCode:"LKO",toName:"Lucknow",toTime:"10:55",duration:"45h 25m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":750,"3A":2000,"2A":2960,"1A":5110}},
+    {number:"12592",name:"Gorakhpur Express",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"17:30",toCode:"ASH",toName:"Aishbagh",toTime:"09:40",duration:"40h 10m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":750,"3A":2000,"2A":2960,"1A":5110}},
+    {number:"15024",name:"YPR GKP Express",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"23:40",toCode:"LKO",toName:"Lucknow",toTime:"13:10",duration:"37h 30m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":750,"3A":2000,"2A":2960,"1A":5110}},
+    {number:"22534",name:"YPR Gorakhpur Express",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"23:40",toCode:"ASH",toName:"Aishbagh",toTime:"13:20",duration:"37h 40m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":750,"3A":2000,"2A":2960,"1A":5110}}
+  ],
+  "LKO-SBC": [
+    {number:"12591",name:"GKP YPR Express",fromCode:"ASH",fromName:"Aishbagh",fromTime:"11:45",toCode:"YPR",toName:"Yasvantpur Jn",toTime:"02:30",duration:"38h 45m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":750,"3A":2000,"2A":2960,"1A":5110}},
+    {number:"22533",name:"GKP YPR Superfast",fromCode:"ASH",fromName:"Aishbagh",fromTime:"11:45",toCode:"YPR",toName:"Yasvantpur Jn",toTime:"02:45",duration:"39h 00m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":750,"3A":2000,"2A":2960,"1A":5110}},
+    {number:"15023",name:"GKP YPR Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"15:55",toCode:"YPR",toName:"Yasvantpur Jn",toTime:"10:30",duration:"42h 35m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":750,"3A":2000,"2A":2960,"1A":5110}},
+    {number:"22684",name:"LKO YPR SF Express",fromCode:"UTR",fromName:"Utraitia Jn",fromTime:"19:03",toCode:"YPR",toName:"Yasvantpur Jn",toTime:"13:15",duration:"42h 12m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":750,"3A":2000,"2A":2960,"1A":5110}},
+    {number:"12540",name:"LKO YPR Express",fromCode:"LKO",fromName:"Lucknow",fromTime:"20:25",toCode:"YPR",toName:"Yasvantpur Jn",toTime:"15:45",duration:"43h 20m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":750,"3A":2000,"2A":2960,"1A":5110}}
+  ],
+  "GHY-SBC": [
+    {number:"22502",name:"NTSK SMVB Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"05:15",toCode:"SMVB",toName:"SMVT Bengaluru",toTime:"09:45",duration:"52h 30m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"12510",name:"GHY SMVB Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"06:15",toCode:"SMVB",toName:"SMVT Bengaluru",toTime:"10:00",duration:"51h 45m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"12552",name:"KYQ SMVB AC Express",fromCode:"KYQ",fromName:"Kamakhya",fromTime:"14:00",toCode:"SMVB",toName:"SMVT Bengaluru",toTime:"16:35",duration:"50h 35m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"12504",name:"Humsafar Express",fromCode:"GHY",fromName:"Guwahati",fromTime:"18:40",toCode:"SMVB",toName:"SMVT Bengaluru",toTime:"20:10",duration:"49h 30m",days:["M","T","W","T","F","S","S"],classes:["3A"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}}
+  ],
+  "SBC-GHY": [
+    {number:"22501",name:"New Tinsukia Express",fromCode:"SMVB",fromName:"SMVT Bengaluru",fromTime:"03:30",toCode:"GHY",toName:"Guwahati",toTime:"04:40",duration:"49h 10m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"12551",name:"SMVB KYQ AC Express",fromCode:"SMVB",fromName:"SMVT Bengaluru",fromTime:"09:30",toCode:"KYQ",toName:"Kamakhya",toTime:"13:45",duration:"52h 15m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"12503",name:"AGTL Humsafar",fromCode:"SMVB",fromName:"SMVT Bengaluru",fromTime:"10:15",toCode:"GHY",toName:"Guwahati",toTime:"12:45",duration:"50h 30m",days:["M","T","W","T","F","S","S"],classes:["3A"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}},
+    {number:"12509",name:"Guwahati Express",fromCode:"SMVB",fromName:"SMVT Bengaluru",fromTime:"23:40",toCode:"GHY",toName:"Guwahati",toTime:"04:50",duration:"53h 10m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":875,"3A":2315,"2A":3465,"1A":6020}}
+  ],
+  "NDLS-SBC": [
+    {number:"12648",name:"Kongu SF Express",fromCode:"NZM",fromName:"Hazrat Nizamuddin",fromTime:"07:00",toCode:"KJM",toName:"Krishnarajapuram",toTime:"21:48",duration:"38h 48m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":765,"3A":2040,"2A":3020,"1A":5225}},
+    {number:"22686",name:"Karnataka Sampark Kranti",fromCode:"NDLS",fromName:"New Delhi",fromTime:"08:15",toCode:"YPR",toName:"Yasvantpur Jn",toTime:"05:25",duration:"45h 10m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL"],fares:{"SL":765,"3A":2040,"2A":3020,"1A":5225}},
+    {number:"12650",name:"YPR Sampark Kranti",fromCode:"NZM",fromName:"Hazrat Nizamuddin",fromTime:"08:20",toCode:"YPR",toName:"Yasvantpur Jn",toTime:"04:15",duration:"43h 55m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":765,"3A":2040,"2A":3020,"1A":5225}},
+    {number:"22692",name:"SBC Rajdhani",fromCode:"NZM",fromName:"Hazrat Nizamuddin",fromTime:"19:50",toCode:"SBC",toName:"KSR Bengaluru",toTime:"05:20",duration:"33h 30m",days:["Daily"],classes:["1A","2A","3A"],fares:{"SL":765,"3A":2040,"2A":3020,"1A":5225}},
+    {number:"12628",name:"Karnataka Express",fromCode:"NDLS",fromName:"New Delhi",fromTime:"20:20",toCode:"SBC",toName:"KSR Bengaluru",toTime:"12:00",duration:"39h 40m",days:["Daily"],classes:["1A","2A","3A","SL"],fares:{"SL":765,"3A":2040,"2A":3020,"1A":5225}}
+  ],
+  "SBC-NDLS": [
+    {number:"12649",name:"Sampark Kranti",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"13:30",toCode:"NZM",toName:"Hazrat Nizamuddin",toTime:"08:10",duration:"42h 40m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":765,"3A":2040,"2A":3020,"1A":5225}},
+    {number:"12629",name:"Sampark Kranti",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"15:00",toCode:"NZM",toName:"Hazrat Nizamuddin",toTime:"11:40",duration:"44h 40m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","CC","SL","3E"],fares:{"SL":765,"3A":2040,"2A":3020,"1A":5225}},
+    {number:"22685",name:"CDG Sampark Kranti",fromCode:"YPR",fromName:"Yasvantpur Jn",fromTime:"15:00",toCode:"NDLS",toName:"New Delhi",toTime:"11:55",duration:"44h 55m",days:["M","T","W","T","F","S","S"],classes:["1A","2A","3A","CC","SL"],fares:{"SL":765,"3A":2040,"2A":3020,"1A":5225}},
+    {number:"12627",name:"Karnataka Express",fromCode:"SBC",fromName:"KSR Bengaluru",fromTime:"19:20",toCode:"NDLS",toName:"New Delhi",toTime:"09:00",duration:"37h 40m",days:["Daily"],classes:["1A","2A","3A","SL"],fares:{"SL":765,"3A":2040,"2A":3020,"1A":5225}},
+    {number:"22691",name:"Rajdhani Express",fromCode:"SBC",fromName:"KSR Bengaluru",fromTime:"20:00",toCode:"NZM",toName:"Hazrat Nizamuddin",toTime:"05:30",duration:"33h 30m",days:["Daily"],classes:["1A","2A","3A"],fares:{"SL":765,"3A":2040,"2A":3020,"1A":5225}}
+  ],
+  "BCT-SBC": [
+    {number:"11301",name:"Udyan Express",fromCode:"CSMT",fromName:"C Shivaji Maharaj T",fromTime:"07:55",toCode:"SBC",toName:"KSR Bengaluru",toTime:"06:00",duration:"22h 05m",days:["Daily"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":485,"3A":1325,"2A":1925,"1A":3285}},
+    {number:"19667",name:"Mys Humsafar Express",fromCode:"BSR",fromName:"Vasai Road",fromTime:"13:00",toCode:"SBC",toName:"KSR Bengaluru",toTime:"12:05",duration:"23h 05m",days:["M","T","W","T","F","S","S"],classes:["3A","SL"],fares:{"SL":485,"3A":1325,"2A":1925,"1A":3285}},
+    {number:"16613",name:"RJT CBE Express",fromCode:"BSR",fromName:"Vasai Road",fromTime:"16:40",toCode:"KJM",toName:"Krishnarajapuram",toTime:"12:23",duration:"19h 43m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":485,"3A":1325,"2A":1925,"1A":3285}},
+    {number:"16331",name:"Trivandram Express",fromCode:"LTT",fromName:"Lokmanyatilak",fromTime:"20:55",toCode:"KJM",toName:"Krishnarajapuram",toTime:"15:19",duration:"18h 24m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL","3E"],fares:{"SL":485,"3A":1325,"2A":1925,"1A":3285}},
+    {number:"11013",name:"LTT CBE Express",fromCode:"LTT",fromName:"Lokmanyatilak",fromTime:"22:35",toCode:"SBC",toName:"KSR Bengaluru",toTime:"21:15",duration:"22h 40m",days:["Daily"],classes:["1A","2A","3A","SL"],fares:{"SL":485,"3A":1325,"2A":1925,"1A":3285}}
+  ],
+  "SBC-BCT": [
+    {number:"11022",name:"TEN DR Express",fromCode:"SMVB",fromName:"SMVT Bengaluru",fromTime:"04:30",toCode:"DR",toName:"Dadar",toTime:"05:45",duration:"25h 15m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":485,"3A":1325,"2A":1925,"1A":3285}},
+    {number:"11006",name:"Chalukya Express",fromCode:"SMVB",fromName:"SMVT Bengaluru",fromTime:"05:10",toCode:"DR",toName:"Dadar",toTime:"05:45",duration:"24h 35m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":485,"3A":1325,"2A":1925,"1A":3285}},
+    {number:"16614",name:"CBE RJT Express",fromCode:"KJM",fromName:"Krishnarajapuram",fromTime:"07:00",toCode:"BSR",toName:"Vasai Road",toTime:"06:00",duration:"23h 00m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL"],fares:{"SL":485,"3A":1325,"2A":1925,"1A":3285}},
+    {number:"19567",name:"Vivek Express",fromCode:"YNK",fromName:"Yelahanka Jn",fromTime:"11:40",toCode:"BSR",toName:"Vasai Road",toTime:"09:00",duration:"21h 20m",days:["M","T","W","T","F","S","S"],classes:["2A","3A","SL","3E"],fares:{"SL":485,"3A":1325,"2A":1925,"1A":3285}},
+    {number:"11302",name:"Udyan Express",fromCode:"SBC",fromName:"KSR Bengaluru",fromTime:"20:40",toCode:"CSMT",toName:"C Shivaji Maharaj T",toTime:"20:15",duration:"23h 35m",days:["Daily"],classes:["1A","2A","3A","SL","3E"],fares:{"SL":485,"3A":1325,"2A":1925,"1A":3285}}
+  ],
 };

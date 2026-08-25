@@ -53,6 +53,15 @@
   --color-gold-500: #e8c468;    /* station dots, route-line motifs */
   --color-gold-400: #f0d68e;
 
+  /* Secondary accents - used sparingly to add life without diluting the
+     railway-orange identity. Teal carries calm utility states; violet is
+     reserved for small secondary highlights. */
+  --color-accent-teal-600: #3f8f8a;
+  --color-accent-teal-500: #55aaa4;
+  --color-accent-teal-100: #dff1ef;
+  --color-accent-violet-500: #8a82c7;
+  --color-accent-violet-100: #e9e7f7;
+
   /* Deliberate luminous accent for the India journey map's ACTIVE route
      only (see route-preview.js / components.css). Distinct from the
      accent/gold tokens above so the "selected route" state reads as a

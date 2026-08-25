@@ -4,7 +4,8 @@
   <script>
     (function () {
       try {
-        document.documentElement.dataset.theme = localStorage.getItem("irctc-redesign-theme") === "light" ? "light" : "dark";
+        const savedTheme = localStorage.getItem("irctc-redesign-theme");
+        document.documentElement.dataset.theme = savedTheme === "light" ? "light" : "dark";
       } catch (_) {
         document.documentElement.dataset.theme = "dark";
       }
@@ -41,6 +42,7 @@
         <li><a href="#booking-widget" class="navbar__link">Book Ticket</a></li>
         <li><a href="#pnr-status" class="navbar__link">PNR Status</a></li>
         <li><a href="#train-status" class="navbar__link">Train Status</a></li>
+        <li><a href="#my-bookings" class="navbar__link">My Bookings</a></li>
       </ul>
 
       <div class="navbar__clock" id="live-clock" aria-label="Current date and time">
@@ -414,7 +416,7 @@
       <div class="railway-moments__grid">
         <article class="railway-moment railway-moment--wide">
           <a class="railway-moment__image" href="https://commons.wikimedia.org/wiki/File:Indian_Railways_Train_in_2025.jpg" target="_blank" rel="noopener noreferrer">
-            <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Indian_Railways_Train_in_2025.jpg" alt="Indian Railways train travelling through the landscape" loading="lazy">
+            <img src="assets/images/Indian_Railways_Train_in_2025.jpg" alt="Indian Railways train travelling through the landscape" loading="lazy">
           </a>
           <div class="railway-moment__body">
             <div>
@@ -427,8 +429,8 @@
         </article>
 
         <article class="railway-moment">
-          <a class="railway-moment__image" href="https://commons.wikimedia.org/wiki/File:Jaipur_Junction_platform_scene,_2008_(2).JPG" target="_blank" rel="noopener noreferrer">
-            <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Jaipur_Junction_platform_scene%2C_2008_%282%29.JPG" alt="Jaipur Junction railway platform" loading="lazy">
+          <a class="railway-moment__image" href="https://commons.wikimedia.org/wiki/File:JAIPUR_RAILWAY_STATION.jpg" target="_blank" rel="noopener noreferrer">
+            <img src="assets/images/JAIPUR_RAILWAY_STATION.jpg" alt="Jaipur Junction railway platform" loading="lazy">
           </a>
           <div class="railway-moment__body">
             <div>
@@ -441,8 +443,8 @@
         </article>
 
         <article class="railway-moment">
-          <a class="railway-moment__image" href="https://commons.wikimedia.org/wiki/File:Beautiful_View_from_Train.jpg" target="_blank" rel="noopener noreferrer">
-            <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Beautiful_View_from_Train.jpg" alt="Indian landscape viewed from a train journey" loading="lazy">
+          <a class="railway-moment__image" href="https://commons.wikimedia.org/wiki/File:From_train_window.jpg" target="_blank" rel="noopener noreferrer">
+            <img src="assets/images/From_train_window.jpg" alt="Indian landscape viewed from a train journey" loading="lazy">
           </a>
           <div class="railway-moment__body">
             <div>
@@ -521,6 +523,7 @@
   <script src="js/booking-form.js" defer></script>
   <script src="js/data/train-data.js" defer></script>
   <script src="js/search-results.js" defer></script>
+  <script src="js/booking-utils.js" defer></script>
   <script src="js/quick-actions.js" defer></script>
   <!-- ============ THEME TOGGLE ============ -->
   <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
